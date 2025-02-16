@@ -69,3 +69,24 @@
 .active a, .active i{
 	color: rgb(227, 82, 5);
 }
+
+.header-content{
+	display: flex;
+	align-items: center;
+	height: 50px;
+	justify-content: flex-end;
+	margin: 0 15px;
+}
+
+.header-content i{
+	font-size: 1.2rem;
+	margin-right: 20px;
+}
+
+.header-content a{
+	text-decoration: none;
+	font-size: 1.2rem;
+	color: blue;
+	margin: 0 10px;
+	text-transform: uppercase;
+}
