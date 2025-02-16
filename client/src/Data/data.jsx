@@ -10,8 +10,8 @@ export const UserMenu = [
 		icon: "fa-solid fa-list"
 	},
 	{
-		name: "Apply Doctor",
-		path: "/apply-doctor",
+		name: "Recruitment",
+		path: "/recruitment",
 		icon: "fa-solid fa-user-doctor"
 	},
 	{

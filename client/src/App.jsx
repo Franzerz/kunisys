@@ -16,7 +16,7 @@ function App() {
     {loading ? <Spinner /> :
     <Routes>
       <Route path="/" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
-      <Route path="/apply-doctor" element={<ProtectedRoute><ApplyDoctor/></ProtectedRoute>} />
+      <Route path="/recruitment" element={<ProtectedRoute><ApplyDoctor/></ProtectedRoute>} />
       <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
       <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
     </Routes>
