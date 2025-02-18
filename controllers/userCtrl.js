@@ -97,4 +97,18 @@ const authController = async (req, res) => {
 	}
   }
 
-module.exports = {loginController, registerController, authController, recruitController, notifyController};
+  const delnotiController = async (req, res) => {
+	try {
+		const user = await userModel.findOne({_id:req.body.userId})
+		user.notification = []
+		user.seenoti = []
+		const updateUser = await user.save()
+		updateUser.password = undefined
+		res.status(200).send({success: true, message: "All notifications deleted successfully", data: updateUser})
+	} catch (error) {
+		console.log(error)
+		res.status(500).send({success: false, error, message: "Unable to delete all notifications"})
+	}
+  }
+
+module.exports = {loginController, registerController, authController, recruitController, notifyController, delnotiController};
