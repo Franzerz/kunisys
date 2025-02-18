@@ -1,11 +1,36 @@
 import React from 'react'
 import Layout from '../components/Layout'
-import { Col, Form, Input, Row, TimePicker } from 'antd'
+import { Col, Form, Input, message, Row, TimePicker } from 'antd'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { showLoading,hideLoading } from '../redux/features/alertSlice'
+import axios from 'axios'
 
 const ApplyDoctor = () => {
-	const handleFinish = (values) => {
-		console.log(values)
-
+	const {user} = useSelector(state => state.user)
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const handleFinish = async (values) => {
+		try{
+			dispatch(showLoading())
+			const res = await axios.post('/api/v1/user/recruit', {...values, userId:user._id}, {
+				headers:{
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
+			dispatch(hideLoading())
+			if(res.data.success){
+				message.success(res.data.success)
+				navigate('/')
+			}
+			else{
+				message.error(res.data.success)
+			}
+		} catch (error) {
+			dispatch(hideLoading())
+			console.log(error)
+			message.error("Something went wrong")
+		}
 	}
   return (
 	<Layout>
@@ -53,7 +78,7 @@ const ApplyDoctor = () => {
 				</Col>
 				<Col xs={24} md={24} lg={8}>
 					<Form.Item label="Medical License" name="license" required rules={[{required: true}]}>
-						<Input type="text" placeholder="50000.-/Month"/>
+						<Input type="text" placeholder="1234"/>
 					</Form.Item>
 				</Col>
 				<Col xs={24} md={24} lg={8}>
@@ -63,13 +88,13 @@ const ApplyDoctor = () => {
 				</Col>
 				<Col xs={24} md={24} lg={8}>
 					<Form.Item label="Available Timeslot" name="time" required rules={[{required: true}]}>
-						<TimePicker.RangePicker/>
+						<TimePicker.RangePicker format="HH:mm"/>
 					</Form.Item>
 				</Col>
+				<Col xs={24} md={24} lg={8}>
+				<button type="submit" className="btn btn-primary form-btn">Submit</button>
+				</Col>
 			</Row>
-			<div className="d-flex justify-content-end">
-				<button type="submit" className="btn btn-primary">Submit</button>
-			</div>
 		</Form>
 	</Layout>
   )
