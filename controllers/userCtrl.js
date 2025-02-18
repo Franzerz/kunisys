@@ -42,6 +42,7 @@ const loginController = async (req,res) => {
 	}
 };
 
+//auth callback
 const authController = async (req, res) => {
 	try {
 	  const user = await userModel.findById({ _id: req.body.userId });
@@ -56,6 +57,7 @@ const authController = async (req, res) => {
 	}
   };
 
+//recruit ctrl
   const recruitController = async (req, res) => {
 	try{
 		const newDoctor = await doctorModel({...req.body, status: 'pending'})
@@ -78,4 +80,21 @@ const authController = async (req, res) => {
 	}
   }
 
-module.exports = {loginController, registerController, authController, recruitController};
+  //notification ctrl
+  const notifyController = async (req, res) => {
+	try{
+		const user = await userModel.findOne({_id:req.body.userId})
+		const seenoti = user.seenoti
+		const notification = user.notification
+		seenoti.push(...notification)
+		user.notification = []
+		user.seenoti = notification
+		const updateUser = await user.save()
+		res.status(200).send({success: true, message:"All notifications marked as read", data: updateUser})
+	} catch(error){
+		console.log(error)
+		res.status(500).send({success: false, error, message: "Error in notification"})
+	}
+  }
+
+module.exports = {loginController, registerController, authController, recruitController, notifyController};
