@@ -22,4 +22,5 @@ router.post('/notification', authMiddleware, notifyController);
 
 // Delete Notification || POST
 router.post('/delnoti', authMiddleware, delnotiController);
+
 module.exports = router;
