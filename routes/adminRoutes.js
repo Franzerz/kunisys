@@ -8,6 +8,6 @@ const router = express.Router()
 router.get('/getAllUsers', authMiddleware, usersController)
 
 //GET METHOD || DOCTORS
-router.get('/getAllDoctors', authMiddleware, doctorsControllerController)
+router.get('/getAllDoctors', authMiddleware, doctorsController)
 
 module.exports = router
