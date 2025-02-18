@@ -1,5 +1,5 @@
-const doctorModel = require('../models/doctorModel');
-const userModel = require('../models/userModel');
+const doctorModel = require('../models/doctorModels');
+const userModel = require('../models/userModels');
 
 const usersController = async(req,res) => {
 	try {
@@ -11,7 +11,7 @@ const usersController = async(req,res) => {
 	}
 }
 
-const doctorsController = async(res,req) => {
+const doctorsController = async(req,res) => {
 	try {
 		const doctors = await doctorModel.find({})
 		res.status(200).send({success: true, data: doctors, message: 'Doctors data fetched successfully'})
@@ -21,4 +21,4 @@ const doctorsController = async(res,req) => {
 	}
 }
 
-export { usersController, doctorsController }
+module.exports = { usersController, doctorsController }
