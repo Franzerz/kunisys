@@ -30,7 +30,7 @@ const accountStatusController = async(req,res) => {
 		notification.push({type:'account-request-update', message:`Your account status has been ${status}`, onClickPath:'/notification'})
 		user.isDoctor = status === 'approved' ? true : false
 		await user.save()
-		res.status(200).send({success: true, message: `Account status updated`, data: doctor})
+		res.status(201).send({success: true, message: `Account status updated`, data: doctor})
 	} catch (error) {
 		console.log(error)
 		res.status(500).send({success: false, error, message: 'Error while updating account status'})

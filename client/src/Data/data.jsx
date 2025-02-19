@@ -1,4 +1,4 @@
-export const UserMenu = [
+export const userMenu = [
 	{
 		name: "Home",
 		path: "/",
@@ -21,7 +21,7 @@ export const UserMenu = [
 	},
 ]
 
-export const AdminMenu = [
+export const adminMenu = [
 	{
 		name: "Home",
 		path: "/",
