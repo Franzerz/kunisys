@@ -1,13 +1,16 @@
 const express = require('express')
 const authMiddleware = require('../middlewares/authMiddleware')
-const { usersController, doctorsController } = require('../controllers/adminCtrl')
+const { usersController, doctorsController, accountStatusController } = require('../controllers/adminCtrl')
 
 const router = express.Router()
 
-//GET METHOD || USERS
+//GET || USERS
 router.get('/getAllUsers', authMiddleware, usersController)
 
-//GET METHOD || DOCTORS
+//GET || DOCTORS
 router.get('/getAllDoctors', authMiddleware, doctorsController)
+
+//POST ACCOUNT STATUS
+router.post('/accountStatus', authMiddleware, accountStatusController)
 
 module.exports = router
