@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { showLoading,hideLoading } from '../redux/features/alertSlice'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 const ApplyDoctor = () => {
 	const {user} = useSelector(state => state.user)
@@ -13,18 +14,23 @@ const ApplyDoctor = () => {
 	const handleFinish = async (values) => {
 		try{
 			dispatch(showLoading())
-			const res = await axios.post('/api/v1/user/recruit', {...values, userId:user._id}, {
+			const res = await axios.post('/api/v1/user/recruit', 
+				{...values, userId:user._id,
+					time:[
+						values.time[0].format('HH:mm'),
+        				values.time[1].format('HH:mm'),
+					]}, {
 				headers:{
 					Authorization: `Bearer ${localStorage.getItem('token')}`
 				}
 			})
 			dispatch(hideLoading())
 			if(res.data.success){
-				message.success(res.data.success)
+				message.success(res.data.message)
 				navigate('/')
 			}
 			else{
-				message.error(res.data.success)
+				message.error(res.data.message)
 			}
 		} catch (error) {
 			dispatch(hideLoading())
@@ -87,7 +93,7 @@ const ApplyDoctor = () => {
 					</Form.Item>
 				</Col>
 				<Col xs={24} md={24} lg={8}>
-					<Form.Item label="Available Timeslot" name="time" required rules={[{required: true}]}>
+					<Form.Item label="Available Timeslot" name="time" required>
 						<TimePicker.RangePicker format="HH:mm"/>
 					</Form.Item>
 				</Col>
