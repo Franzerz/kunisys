@@ -1,6 +1,14 @@
 const express = require('express');
-const { loginController, registerController, authController, recruitController, notifyController, delnotiController } = require('../controllers/userCtrl')
+const { loginController, 
+		registerController, 
+		authController, 
+		recruitController, 
+		notifyController, 
+		delnotiController,
+		getAllDocController,	
+	} = require('../controllers/userCtrl')
 const authMiddleware = require("../middlewares/authMiddleware");
+const { get } = require('mongoose');
 
 const router = express.Router();
 
@@ -22,5 +30,8 @@ router.post('/notification', authMiddleware, notifyController);
 
 // Delete Notification || POST
 router.post('/delnoti', authMiddleware, delnotiController);
+
+//Get all doctors
+router.get('/getAllDoctors', authMiddleware, getAllDocController);
 
 module.exports = router;
