@@ -189,5 +189,5 @@ module.exports = {
 	getAllDocController,
 	appointmentController,
 	availabilityController,
-	userAppointmentController
+	userAppointmentController,
 };

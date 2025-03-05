@@ -8,7 +8,7 @@ const { loginController,
 		getAllDocController,
 		appointmentController,
 		availabilityController,
-		userAppointmentController	
+		userAppointmentController,
 	} = require('../controllers/userCtrl')
 const authMiddleware = require("../middlewares/authMiddleware");
 const { get } = require('mongoose');

@@ -27,7 +27,7 @@ function App() {
       <Route path="/notification" element={<ProtectedRoute><NotificationPage/></ProtectedRoute>} />
       <Route path="/admin/users" element={<ProtectedRoute><Users/></ProtectedRoute>} />
       <Route path="/admin/doctors" element={<ProtectedRoute><Doctors/></ProtectedRoute>} />
-      <Route path="/doctor/profile/:id" element={<ProtectedRoute><Profile/></ProtectedRoute>} />
+      <Route path="/doctor/profile/" element={<ProtectedRoute><Profile/></ProtectedRoute>} />
       <Route path="/doctor/appointment/:doctorId" element={<ProtectedRoute><BookingPage/></ProtectedRoute>} />
       <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
       <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
