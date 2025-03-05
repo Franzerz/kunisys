@@ -166,7 +166,16 @@ const authController = async (req, res) => {
 	} catch (error) {
 		console.log(error)
 		res.status(500).send({success: false, error, message: "Error while setting availability"})
-		
+	}
+  }
+
+  const userAppointmentController = async (req, res) => {
+	try {
+		const appointments = await appointModel.find({userId: req.body.userId})
+		res.status(200).send({success: true, data: appointments, message: "User appointments fetched successfully"})
+	} catch (error) {
+		console.log(error)
+		res.status(500).send({success: false, error, message: "Error while fetching user appointments"})
 	}
   }
 
@@ -179,5 +188,6 @@ module.exports = {
 	delnotiController, 
 	getAllDocController,
 	appointmentController,
-	availabilityController
+	availabilityController,
+	userAppointmentController
 };
