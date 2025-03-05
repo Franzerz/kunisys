@@ -138,7 +138,7 @@ const authController = async (req, res) => {
 		user.notification.push({
 			type: 'new-appointment-request',
 			message: `A new appointment request from ${req.body.userInfo.name}`,
-			onClickPath: '/user/appointments'
+			onClickPath: '/doctor-appointment'
 		})
 		await user.save()
 		res.status(200).send({success: true, message: "Appointment booked successfully"})

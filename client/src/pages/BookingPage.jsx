@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
-import Layout from '../../components/Layout'
+import Layout from '../components/Layout'
 import { DatePicker, message, TimePicker } from 'antd';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
-import {showLoading, hideLoading} from '../../redux/features/alertSlice'
+import {showLoading, hideLoading} from '../redux/features/alertSlice'
 
 const BookingPage = () => {
 	const {user} = useSelector(state => state.user)
