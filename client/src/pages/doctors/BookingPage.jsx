@@ -31,8 +31,38 @@ const BookingPage = () => {
 		}
 	}
 
+	const handleAvailability = async () => {
+		try {
+			dispatch(showLoading())
+			const res = await axios.post('/api/v1/user/availability', {
+				doctorId: params.doctorId,
+				date,
+				time
+			}, {
+				headers: {
+					'Authorization': `Bearer ${localStorage.getItem('token')}`
+				}
+			})
+			dispatch(hideLoading())
+			if(res.data.success){
+				setAvailable(true)
+				console.log(available)
+				message.success(res.data.message)
+			} else{
+				message.error(res.data.message)
+			}
+		} catch (error) {
+			dispatch(hideLoading())
+			console.log(error)
+		}
+	}
+
 	const handleBooking = async () => {
 		try {
+			setAvailable(true);
+			if (!date && !time) {
+				return alert("Date & Time Required");
+			}
 			dispatch(showLoading())
 			const res = await axios.post('/api/v1/user/appointment', {
 				doctorId: params.doctorId,
@@ -70,11 +100,15 @@ const BookingPage = () => {
 					<h4>Specialization: {doctors.specialization}</h4>
 					<h4>Available Timeslot: {doctors.time && doctors.time[0]} - {doctors.time && doctors.time[1]}</h4>
 					<div className="d-flex flex-column w-50">
-						<DatePicker className= "m-2" format="DD-MM-YYYY" onChange={(value) => setDate(dayjs(value).format('DD-MM-YYYY'))} />
-						<TimePicker className= "m-2" format="HH:mm" onChange={(value) => setTime(
-							dayjs(value).format('HH:mm')
-						)}/>
-						<button className='btn btn-primary mt-2'>Check Availability</button>
+						<DatePicker className= "m-2" format="DD-MM-YYYY" onChange={(value) => {
+							
+							setDate(dayjs(value).format('DD-MM-YYYY'))}
+						} />
+						<TimePicker className= "m-2" format="HH:mm" onChange={(value) => {
+							
+							setTime(dayjs(value).format('HH:mm'))}
+						}/>
+						<button className='btn btn-primary mt-2' onClick={handleAvailability}>Check Availability</button>
 						<button className='btn btn-dark mt-2' onClick={handleBooking}>Book Now</button>
 					</div>
 				</div>

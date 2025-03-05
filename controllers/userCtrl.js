@@ -3,6 +3,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const doctorModel = require('../models/doctorModels');
 const appointModel = require('../models/appointModel');
+const dayjs = require('dayjs');
+const customParseFormat = require('dayjs/plugin/customParseFormat');
+dayjs.extend(customParseFormat);
 
 //register callback
 const registerController = async (req,res) => {
@@ -124,6 +127,10 @@ const authController = async (req, res) => {
 
   const appointmentController = async (req, res) => {
 	try {
+		const fullDateTime = `${req.body.date} ${req.body.time}`;
+		const dateTime = dayjs(fullDateTime, 'DD-MM-YYYY HH:mm');
+		req.body.date = dateTime.toISOString();
+		req.body.time = dateTime.toISOString();
 		req.body.status = 'pending'
 		const newAppointment = new appointModel(req.body)
 		await newAppointment.save()
@@ -141,6 +148,28 @@ const authController = async (req, res) => {
 	}
   }
 
+  const availabilityController = async (req, res) => {
+	try {
+		const date = dayjs(req.body.date, "DD-MM-YYYY").toISOString();
+		const fromTime = dayjs(req.body.time, "HH:mm").subtract(1, "hour").toISOString();
+		const toTime = dayjs(req.body.time, "HH:mm").add(1, "hour").toISOString();
+		const doctorId = req.body.doctorId;
+		const appointments = await appointModel.find({doctorId, date, time:{
+			$gte: fromTime,
+			$lte: toTime
+		}});
+		if(appointments.length > 0){
+			return res.status(200).send({success: true, message: "Doctor is not available at this time"})
+		} else{
+			return res.status(200).send({success: true, message: "Doctor is available at this time"})
+		}
+	} catch (error) {
+		console.log(error)
+		res.status(500).send({success: false, error, message: "Error while setting availability"})
+		
+	}
+  }
+
 module.exports = {
 	loginController, 
 	registerController, 
@@ -149,4 +178,6 @@ module.exports = {
 	notifyController, 
 	delnotiController, 
 	getAllDocController,
-	appointmentController};
+	appointmentController,
+	availabilityController
+};

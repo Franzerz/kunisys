@@ -6,7 +6,8 @@ const { loginController,
 		notifyController, 
 		delnotiController,
 		getAllDocController,
-		appointmentController	
+		appointmentController,
+		availabilityController	
 	} = require('../controllers/userCtrl')
 const authMiddleware = require("../middlewares/authMiddleware");
 const { get } = require('mongoose');
@@ -37,5 +38,8 @@ router.get('/getAllDoctors', authMiddleware, getAllDocController);
 
 //Book appointment || POST
 router.post('/appointment', authMiddleware, appointmentController);
+
+//Availability || POST
+router.post('/availability', authMiddleware, availabilityController);
 
 module.exports = router;
