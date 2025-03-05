@@ -58,7 +58,7 @@ const NotificationPage = () => {
 		<Tabs>
 			<Tabs.TabPane tab="Unread" key={0}>
 				<div className="d-flex justify-content-end">
-					<h4 className="p-2" onClick={handleMarkAllRead}>Mark All Read</h4>
+					<h4 className="p-2" style={{cursor:'pointer'}} onClick={handleMarkAllRead}>Mark All Read</h4>
 				</div>
 				{user?.notification.map((notificationMsg) => (
 						<div className="card" style={{cursor: 'pointer'}}>
