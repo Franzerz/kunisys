@@ -151,8 +151,8 @@ const authController = async (req, res) => {
   const availabilityController = async (req, res) => {
 	try {
 		const date = dayjs(req.body.date, "DD-MM-YYYY").toISOString();
-		const fromTime = dayjs(req.body.time, "HH:mm").subtract(1, "hour").toISOString();
-		const toTime = dayjs(req.body.time, "HH:mm").add(1, "hour").toISOString();
+		const fromTime = dayjs(req.body.time, "HH:mm").subtract(1, "hours").toISOString();
+		const toTime = dayjs(req.body.time, "HH:mm").add(1, "hours").toISOString();
 		const doctorId = req.body.doctorId;
 		const appointments = await appointModel.find({doctorId, date, time:{
 			$gte: fromTime,
