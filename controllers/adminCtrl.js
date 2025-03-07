@@ -21,20 +21,38 @@ const doctorsController = async(req,res) => {
 	}
 }
 
-const accountStatusController = async(req,res) => {
+const accountStatusController = async (req, res) => {
 	try {
-		const {doctorId, status} = req.body
-		const doctor = await doctorModel.findByIdAndUpdate(doctorId, {status})
-		const user = await userModel.findOne({_id:doctor.userId})
-		const notification = user.notification
-		notification.push({type:'account-request-update', message:`Your account status has been ${status}`, onClickPath:'/notification'})
-		user.isDoctor = status === 'approved' ? true : false
-		await user.save()
-		res.status(201).send({success: true, message: `Account status updated`, data: doctor})
+	  const { doctorId, status } = req.body;
+	  if (status === 'approved') {
+		const doctor = await require('../models/doctorModels').findByIdAndUpdate(doctorId, {status: 'approved'}, {new: true});
+		await require('../models/userModels').findByIdAndUpdate(doctor.userId, { isDoctor: true });
+		const user = await require('../models/userModels').findOne({ _id: doctor.userId });
+		user.notification.push({type: 'account-request-update', message: `Your account status has been approved`, onClickPath: '/notification'});
+		await user.save();
+		return res.status(200).send({ success: true, message: 'Doctor account approved successfully', data: doctor });
+	  } else if (status === 'rejected') {
+		const doctor = await require('../models/doctorModels').findById(doctorId);
+		if (!doctor) {
+		  return res.status(404).send({ success: false, message: 'Doctor record not found' });
+		}
+		await require('../models/userModels').findByIdAndUpdate(doctor.userId, { isDoctor: false });
+		await require('../models/doctorModels').findByIdAndDelete(doctorId);
+		const user = await require('../models/userModels').findOne({ _id: doctor.userId });
+		user.notification.push({
+		  type: 'account-request-update',
+		  message: `Your doctor recruitment request has been rejected`,
+		  onClickPath: '/notification'
+		});
+		await user.save();
+		return res.status(200).send({ success: true, message: 'Doctor recruitment rejected and record deleted' });
+	  } else {
+		return res.status(400).send({ success: false, message: 'Invalid status provided' });
+	  }
 	} catch (error) {
-		console.log(error)
-		res.status(500).send({success: false, error, message: 'Error while updating account status'})
+	  console.log(error);
+	  return res.status(500).send({ success: false, error: error.message, message: 'Error while updating account status' });
 	}
-}
+  }
 
 module.exports = { usersController, doctorsController, accountStatusController }

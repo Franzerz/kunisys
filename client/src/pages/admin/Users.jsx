@@ -30,6 +30,10 @@ const Users = () => {
 	const columns = [
 		{title:'Name', dataIndex:'name'},
 		{title:'Email', dataIndex:'email'},
+		{title:'Admin', dataIndex:'isAdmin',
+			render: (text, record) => (
+				<span>{record.isAdmin? "Yes" : "No"}</span>
+		)},
 		{title:'Doctor', dataIndex:'isDoctor',
 			render: (text, record) => (
 				<span>{record.isDoctor? "Yes" : "No"}</span>
