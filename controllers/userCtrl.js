@@ -6,6 +6,9 @@ const appointModel = require('../models/appointModel');
 const dayjs = require('dayjs');
 const customParseFormat = require('dayjs/plugin/customParseFormat');
 dayjs.extend(customParseFormat);
+const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+dotenv.config();
 
 //register callback
 const registerController = async (req,res) => {
@@ -187,7 +190,6 @@ const authController = async (req, res) => {
 		{ name, email },
 		{ new: true }
 	  )
-	  // Hide the password before sending the response
 	  updatedUser.password = undefined;
 	  res.status(200).send({success: true, message: 'Profile updated successfully', data: updatedUser,})
 	} catch (error) {
@@ -218,6 +220,72 @@ const authController = async (req, res) => {
 	}
   }
 
+  const forgotPasswordController = async (req, res) => {
+	try {
+	  const { email } = req.body;
+	  const user = await userModel.findOne({ email });
+	  if (!user) {
+		return res.status(404).send({ success: false, message: 'User with this email does not exist' });
+	  }
+	  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '15m' });
+	  const resetLink = `http://localhost:3000/reset-password/${token}`;
+	  const transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+		  user: process.env.GMAIL_USER,
+		  pass: process.env.GMAIL_PASS,
+		},
+	  });
+
+	  const mailOptions = {
+		from: process.env.GMAIL_USER,
+		to: email,
+		subject: 'Password Reset',
+		text: `You requested a password reset. Please click the link below to reset your password:\n\n${resetLink}\n\nThis link expires in 15 minutes.`,
+	  };
+
+	  transporter.sendMail(mailOptions, (error, info) => {
+		if (error) {
+		  console.log(error);
+		  return res.status(500).send({ success: false, message: 'Error sending email' });
+		} else {
+		  return res.status(200).send({ success: true, message: 'Password reset link sent to your email' });
+		}
+	  });
+	} catch (error) {
+	  console.log(error);
+	  res.status(500).send({ success: false, message: error.message });
+	}
+  }
+
+  const resetPasswordController = async (req, res) => {
+	try {
+	  const { token, newPassword } = req.body;
+	  if (!token) {
+		return res.status(400).send({ success: false, message: 'Token is required' });
+	  }
+	  let decoded;
+	  try {
+		decoded = jwt.verify(token, process.env.JWT_SECRET);
+	  } catch (error) {
+		return res.status(400).send({ success: false, message: 'Invalid or expired token' });
+	  }
+	  const user = await userModel.findById(decoded.id);
+	  if (!user) {
+		return res.status(404).send({ success: false, message: 'User not found' });
+	  }
+	  const salt = await bcrypt.genSalt(10);
+	  const hashedPassword = await bcrypt.hash(newPassword, salt);
+	  user.password = hashedPassword;
+	  await user.save();
+  
+	  res.status(200).send({ success: true, message: 'Password reset successful' });
+	} catch (error) {
+	  console.log(error);
+	  res.status(500).send({ success: false, message: error.message });
+	}
+  };
+
 module.exports = {
 	loginController, 
 	registerController, 
@@ -231,4 +299,6 @@ module.exports = {
 	userAppointmentController,
 	updateProfileController,
 	changePasswordController,
+	forgotPasswordController,
+	resetPasswordController,
 };
