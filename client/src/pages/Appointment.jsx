@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Layout from '../components/Layout'
 import dayjs from 'dayjs'
-import { Table } from 'antd'
+import { Table, message } from 'antd'
 
 const Appointment = () => {
 	const [appointment, setAppointment] = useState([])
@@ -25,6 +25,27 @@ const Appointment = () => {
 	useEffect(() => {
 		getAppointment()
 	}, [])
+
+	const handleDeleteAppointment = async (appointmentId) => {
+		try {
+		  const res = await axios.post('/api/v1/user/deleteAppointment', {appointmentId},
+			{
+			  headers: {
+				Authorization: `Bearer ${localStorage.getItem('token')}`
+			  }
+			}
+		  )
+		  if (res.data.success) {
+			message.success(res.data.message)
+			getAppointment() // refresh the list
+		  } else {
+			message.error(res.data.message)
+		  }
+		} catch (error) {
+		  console.log(error)
+		  message.error('Error deleting appointment')
+		}
+	  }
 
 	const columns = [
 		{
@@ -63,6 +84,17 @@ const Appointment = () => {
 			title: 'Status',
 			dataIndex: 'status',
 		},
+		{
+			title: 'Actions',
+			dataIndex: 'actions',
+			render: (text, record) => (
+			  <button 
+				className="btn btn-danger" 
+				onClick={() => handleDeleteAppointment(record._id)}>
+				  Delete
+			  </button>
+			)
+		  }
 	]
 
   return (

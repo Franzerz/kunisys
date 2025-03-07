@@ -13,6 +13,7 @@ const { loginController,
 		changePasswordController,
 		forgotPasswordController,
 		resetPasswordController,
+		deleteAppointmentController,
 	} = require('../controllers/userCtrl')
 const authMiddleware = require("../middlewares/authMiddleware");
 const { get } = require('mongoose');
@@ -61,5 +62,8 @@ router.post('/forgotPassword', forgotPasswordController);
 
 // Reset Password || POST
 router.post('/resetPassword', resetPasswordController);
+
+// Delete Appointment || POST
+router.post('/deleteAppointment', authMiddleware, deleteAppointmentController);
 
 module.exports = router;

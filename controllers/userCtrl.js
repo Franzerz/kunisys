@@ -280,7 +280,18 @@ const authController = async (req, res) => {
 	  console.log(error);
 	  res.status(500).send({ success: false, message: error.message });
 	}
-  };
+  }
+
+  const deleteAppointmentController = async (req, res) => {
+	try {
+	  const { appointmentId } = req.body;
+	  await appointModel.findByIdAndDelete(appointmentId);
+	  res.status(200).send({ success: true, message: "Appointment deleted successfully" });
+	} catch (error) {
+	  console.log(error);
+	  res.status(500).send({ success: false, message: "Error deleting appointment", error: error.message });
+	}
+  }
 
 module.exports = {
 	loginController, 
@@ -297,4 +308,5 @@ module.exports = {
 	changePasswordController,
 	forgotPasswordController,
 	resetPasswordController,
+	deleteAppointmentController
 };
