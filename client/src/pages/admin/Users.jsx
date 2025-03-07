@@ -29,8 +29,7 @@ const Users = () => {
 
 	const handleBlock = async (record) => {
 		try {
-		  const res = await axios.post(
-			'/api/v1/admin/deleteUser', {targetUserId: record._id},
+		  const res = await axios.post('/api/v1/admin/deleteUser', {targetUserId: record._id},
 			{
 			  headers: {
 				Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -48,6 +47,25 @@ const Users = () => {
 		}
 	  }
 	
+	const handleGiveAdmin = async (record) => {
+		try {
+		  const res = await axios.post('/api/v1/admin/giveAdmin', {targetUserId: record._id},
+			{
+			  headers: {
+				Authorization: `Bearer ${localStorage.getItem('token')}`
+			  }
+			}
+		  );
+		  if (res.data.success) {
+			message.success(res.data.message);
+			getUsers();
+		  } else {
+			message.error(res.data.message);
+		  }
+		} catch (error) {
+		  message.error('Error promoting user');
+		}
+	  };
 
 	const columns = [
 		{title: 'Name', dataIndex: 'name'},
@@ -62,6 +80,9 @@ const Users = () => {
 			render: (text, record) => (
 			<div className="d-flex">
 				<button className="btn btn-danger" onClick={() => handleBlock(record)}>Block</button>
+				{!record.isAdmin && (
+					<button className="btn btn-primary ms-2" onClick={() => handleGiveAdmin(record)}>Give Admin</button>
+				)}
 			</div>
 		  )}]
 	

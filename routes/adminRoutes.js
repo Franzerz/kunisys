@@ -1,6 +1,12 @@
 const express = require('express')
 const authMiddleware = require('../middlewares/authMiddleware')
-const { usersController, doctorsController, accountStatusController, deleteUserController } = require('../controllers/adminCtrl')
+const { 
+	usersController, 
+	doctorsController, 
+	accountStatusController, 
+	deleteUserController,
+	giveAdminController
+ } = require('../controllers/adminCtrl')
 
 const router = express.Router()
 
@@ -15,5 +21,8 @@ router.post('/accountStatus', authMiddleware, accountStatusController)
 
 //POST || DELETE USER
 router.post('/deleteUser', authMiddleware, deleteUserController);
+
+//POST || GIVE ADMIN
+router.post('/giveAdmin', authMiddleware, giveAdminController);
 
 module.exports = router
