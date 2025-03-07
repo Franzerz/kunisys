@@ -150,27 +150,26 @@ const authController = async (req, res) => {
 		res.status(500).send({success: false, error, message: "Error while booking appointment"})
 	}
   }
-
-  const availabilityController = async (req, res) => {
-	try {
-		const date = dayjs(req.body.date, "DD-MM-YYYY").toISOString();
-		const fromTime = dayjs(req.body.time, "HH:mm").subtract(1, "hours").toISOString();
-		const toTime = dayjs(req.body.time, "HH:mm").add(1, "hours").toISOString();
-		const doctorId = req.body.doctorId;
-		const appointments = await appointModel.find({doctorId, date, time:{
-			$gte: fromTime,
-			$lte: toTime
-		}});
-		if(appointments.length > 0){
-			return res.status(200).send({success: true, message: "Doctor is not available at this time"})
-		} else{
-			return res.status(200).send({success: true, message: "Doctor is available at this time"})
+  
+	const availabilityController = async (req, res) => {
+		try {
+		const fullDateTime = dayjs(`${req.body.date} ${req.body.time}`, 'DD-MM-YYYY HH:mm');
+		const fromTime = fullDateTime.subtract(15, 'minutes').toISOString();
+		const toTime = fullDateTime.add(15, 'minutes').toISOString();
+		const appointments = await appointModel.find({
+			doctorId: req.body.doctorId,
+			time: { $gte: fromTime, $lte: toTime }
+		});
+		if (appointments.length > 0) {
+			return res.status(200).send({ success: false, message: "Doctor is not available at this time" });
+		} else {
+			return res.status(200).send({ success: true, message: "Doctor is available at this time" });
 		}
-	} catch (error) {
-		console.log(error)
-		res.status(500).send({success: false, error, message: "Error while setting availability"})
+		} catch (error) {
+		console.log(error);
+		res.status(500).send({ success: false, error, message: "Error while checking availability" });
+		}
 	}
-  }
 
   const userAppointmentController = async (req, res) => {
 	try {
