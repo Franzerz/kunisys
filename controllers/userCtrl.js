@@ -196,6 +196,28 @@ const authController = async (req, res) => {
 	}
   }
 
+  const changePasswordController = async (req, res) => {
+	try {
+	  const { userId, currentPassword, newPassword } = req.body;
+	  const user = await userModel.findById(userId);
+	  if (!user) {
+		return res.status(404).send({ success: false, message: 'User not found' });
+	  }
+	  const isMatch = await bcrypt.compare(currentPassword, user.password);
+	  if (!isMatch) {
+		return res.status(400).send({ success: false, message: 'Current password is incorrect' });
+	  }
+	  const salt = await bcrypt.genSalt(10);
+	  const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+	  user.password = hashedNewPassword;
+	  await user.save();
+	  res.status(200).send({ success: true, message: 'Password changed successfully' });
+	} catch (error) {
+	  console.log(error);
+	  res.status(500).send({ success: false, message: error.message });
+	}
+  }
+
 module.exports = {
 	loginController, 
 	registerController, 
@@ -208,4 +230,5 @@ module.exports = {
 	availabilityController,
 	userAppointmentController,
 	updateProfileController,
+	changePasswordController,
 };

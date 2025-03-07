@@ -10,6 +10,7 @@ const { loginController,
 		availabilityController,
 		userAppointmentController,
 		updateProfileController,
+		changePasswordController,
 	} = require('../controllers/userCtrl')
 const authMiddleware = require("../middlewares/authMiddleware");
 const { get } = require('mongoose');
@@ -49,5 +50,8 @@ router.get('/userAppointment', authMiddleware, userAppointmentController);
 
 // Update Profile || POST
 router.post('/updateProfile', authMiddleware, updateProfileController);
+
+// Change Password || POST
+router.post('/changePassword', authMiddleware, changePasswordController);
 
 module.exports = router;
