@@ -89,18 +89,15 @@ const authController = async (req, res) => {
 
   //notification ctrl
   const notifyController = async (req, res) => {
-	try{
-		const user = await userModel.findOne({_id:req.body.userId})
-		const seenoti = user.seenoti
-		const notification = user.notification
-		seenoti.push(...notification)
-		user.notification = []
-		user.seenoti = notification
-		const updateUser = await user.save()
-		res.status(200).send({success: true, message:"All notifications marked as read", data: updateUser})
-	} catch(error){
-		console.log(error)
-		res.status(500).send({success: false, error, message: "Error in notification"})
+	try {
+	  const user = await userModel.findOne({ _id: req.body.userId });
+	  user.seenoti = [...user.seenoti, ...user.notification];
+	  user.notification = [];
+	  const updateUser = await user.save();
+	  res.status(200).send({success: true, message: "All notifications marked as read", data: updateUser.toObject(),});
+	} catch (error) {
+	  console.log(error);
+	  res.status(500).send({ success: false, error, message: "Error in notification" });
 	}
   }
 
@@ -150,7 +147,7 @@ const authController = async (req, res) => {
 		res.status(500).send({success: false, error, message: "Error while booking appointment"})
 	}
   }
-  
+
 	const availabilityController = async (req, res) => {
 		try {
 		const fullDateTime = dayjs(`${req.body.date} ${req.body.time}`, 'DD-MM-YYYY HH:mm');
