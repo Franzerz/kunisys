@@ -71,11 +71,11 @@ const authController = async (req, res) => {
 		notification.push({
 			type:'apply-request', 
 			message: `${newDoctor.firstName} ${newDoctor.lastName} has applied for the doctor position`,
-		data:{
-			doctorId: newDoctor._id,
-			name: newDoctor.firstName + " " + newDoctor.lastName,
+			data:{
+				doctorId: newDoctor._id,
+				name: newDoctor.firstName + " " + newDoctor.lastName},
 			onClickPath: '/admin/doctors/'
-		}})
+	})
 		await userModel.findByIdAndUpdate(adminUser._id,{notification})
 		res.status(201).send({success: true, message: "Application submitted successfully"})
 	} catch(error){
@@ -179,6 +179,23 @@ const authController = async (req, res) => {
 	}
   }
 
+  const updateProfileController = async (req, res) => {
+	try {
+	  const { userId, name, email } = req.body;
+	  const updatedUser = await userModel.findByIdAndUpdate(
+		userId,
+		{ name, email },
+		{ new: true }
+	  )
+	  // Hide the password before sending the response
+	  updatedUser.password = undefined;
+	  res.status(200).send({success: true, message: 'Profile updated successfully', data: updatedUser,})
+	} catch (error) {
+	  console.log(error);
+	  res.status(500).send({success: false, message: 'Error updating profile', error: error.message,})
+	}
+  }
+
 module.exports = {
 	loginController, 
 	registerController, 
@@ -190,4 +207,5 @@ module.exports = {
 	appointmentController,
 	availabilityController,
 	userAppointmentController,
+	updateProfileController,
 };
