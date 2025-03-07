@@ -55,4 +55,25 @@ const accountStatusController = async (req, res) => {
 	}
   }
 
-module.exports = { usersController, doctorsController, accountStatusController }
+const deleteUserController = async (req, res) => {
+	try {
+		const { targetUserId } = req.body;
+		if (req.user && req.user.id === targetUserId) {
+			return res.status(400).send({ success: false, message: 'Cannot block yourself' });
+		}
+		const user = await userModel.findById(targetUserId);
+		if (!user) {
+			return res.status(404).send({ success: false, message: 'User not found' });
+		}
+		if (user.isDoctor) {
+			await doctorModel.deleteOne({ userId: targetUserId });
+		}
+		await userModel.findByIdAndDelete(targetUserId);
+		return res.status(200).send({success: true, message: 'User deleted successfully'});
+	} catch (error) {
+		console.log(error);
+		return res.status(500).send({success: false, message: 'Error deleting user', error: error.message});
+	}
+  }
+
+module.exports = { usersController, doctorsController, accountStatusController, deleteUserController }
