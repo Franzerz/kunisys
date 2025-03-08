@@ -24,7 +24,7 @@ export const userMenu = [
 export const adminMenu = [
 	{
 		name: "Home",
-		path: "/",
+		path: "/admin/home",
 		icon: "fa-solid fa-house"
 	},
 	{
@@ -40,6 +40,24 @@ export const adminMenu = [
 	{
 		name: "Profile",
 		path: "/profile",
+		icon: "fa-solid fa-user"
+	},
+]
+
+export const doctorMenu = [
+	{
+		name: "Home",
+		path: "/doctor/home",
+		icon: "fa-solid fa-house"
+	},
+	{
+		name: "Appointment",
+		path: "/doctor/appointment",
+		icon: "fa-solid fa-list"
+	},
+	{
+		name: "Profile",
+		path: `/doctor/profile/`,
 		icon: "fa-solid fa-user"
 	},
 ]

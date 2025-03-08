@@ -1,8 +1,8 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import {useSelector} from 'react-redux';
 import Spinner from './components/Spinner';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicRoute from './components/PublicRoute';
@@ -17,6 +17,8 @@ import DoctorAppointment from './pages/doctors/DoctorAppointment';
 import UserProfile from './pages/UserProfile';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import DoctorHomePage from './pages/doctors/DoctorHomePage';
+import AdminHomePage from './pages/admin/AdminHomePage';
 
 function App() {
   const {loading} = useSelector(state => state.alerts);
@@ -35,10 +37,12 @@ function App() {
       <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
       <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
       <Route path="/appointment" element={<ProtectedRoute><Appointment /></ProtectedRoute>} />
-      <Route path="/doctor-appointment" element={<ProtectedRoute><DoctorAppointment /></ProtectedRoute>} />
+      <Route path="/doctor/appointment" element={<ProtectedRoute><DoctorAppointment /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
       <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
       <Route path="/reset-password/:token" element={<PublicRoute><ResetPassword /></PublicRoute>} />
+      <Route path="/doctor/home" element={<ProtectedRoute><DoctorHomePage /></ProtectedRoute>} />
+      <Route path="/admin/home" element={<ProtectedRoute><AdminHomePage /></ProtectedRoute>} />
     </Routes>
     }
     </BrowserRouter>

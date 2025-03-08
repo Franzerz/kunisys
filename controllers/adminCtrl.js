@@ -1,5 +1,6 @@
 const doctorModel = require('../models/doctorModels');
 const userModel = require('../models/userModels');
+const appointModel = require('../models/appointModel');
 
 const usersController = async(req,res) => {
 	try {
@@ -25,20 +26,20 @@ const accountStatusController = async (req, res) => {
 	try {
 	  const { doctorId, status } = req.body;
 	  if (status === 'approved') {
-		const doctor = await require('../models/doctorModels').findByIdAndUpdate(doctorId, {status: 'approved'}, {new: true});
-		await require('../models/userModels').findByIdAndUpdate(doctor.userId, { isDoctor: true });
-		const user = await require('../models/userModels').findOne({ _id: doctor.userId });
+		const doctor = await doctorModel.findByIdAndUpdate(doctorId, {status: 'approved'}, {new: true});
+		await userModel.findByIdAndUpdate(doctor.userId, { isDoctor: true });
+		const user = await userModel.findOne({ _id: doctor.userId });
 		user.notification.push({type: 'account-request-update', message: `Your account status has been approved`, onClickPath: '/notification'});
 		await user.save();
 		return res.status(200).send({ success: true, message: 'Doctor account approved successfully', data: doctor });
 	  } else if (status === 'rejected') {
-		const doctor = await require('../models/doctorModels').findById(doctorId);
+		const doctor = await doctorModel.findById(doctorId);
 		if (!doctor) {
 		  return res.status(404).send({ success: false, message: 'Doctor record not found' });
 		}
-		await require('../models/userModels').findByIdAndUpdate(doctor.userId, { isDoctor: false });
-		await require('../models/doctorModels').findByIdAndDelete(doctorId);
-		const user = await require('../models/userModels').findOne({ _id: doctor.userId });
+		await userModel.findByIdAndUpdate(doctor.userId, { isDoctor: false });
+		await doctorModel.findByIdAndDelete(doctorId);
+		const user = await userModel.findOne({ _id: doctor.userId });
 		user.notification.push({
 		  type: 'account-request-update',
 		  message: `Your doctor recruitment request has been rejected`,
@@ -95,4 +96,21 @@ const deleteUserController = async (req, res) => {
 	}
   }
 
-module.exports = { usersController, doctorsController, accountStatusController, deleteUserController, giveAdminController }
+  const getAllAppointmentsController = async (req, res) => {
+	try {
+	  const appointments = await appointModel.find({ status: 'approved' });
+	  res.status(200).send({success: true, data: appointments, message: 'Appointments fetched successfully'});
+	} catch (error) {
+	  console.log(error);
+	  res.status(500).send({success: false, error: error.message, message: 'Error while fetching appointments'});
+	}
+  }
+
+module.exports = { 
+	usersController, 
+	doctorsController, 
+	accountStatusController, 
+	deleteUserController, 
+	giveAdminController,
+	getAllAppointmentsController,
+}

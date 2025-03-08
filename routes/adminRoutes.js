@@ -5,7 +5,8 @@ const {
 	doctorsController, 
 	accountStatusController, 
 	deleteUserController,
-	giveAdminController
+	giveAdminController,
+	getAllAppointmentsController,
  } = require('../controllers/adminCtrl')
 
 const router = express.Router()
@@ -24,5 +25,8 @@ router.post('/deleteUser', authMiddleware, deleteUserController);
 
 //POST || GIVE ADMIN
 router.post('/giveAdmin', authMiddleware, giveAdminController);
+
+//GET || ALL APPOINTMENTS
+router.get('/getAllAppointments', authMiddleware, getAllAppointmentsController);
 
 module.exports = router

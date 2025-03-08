@@ -37,7 +37,7 @@ const Appointment = () => {
 		  )
 		  if (res.data.success) {
 			message.success(res.data.message)
-			getAppointment() // refresh the list
+			getAppointment()
 		  } else {
 			message.error(res.data.message)
 		  }

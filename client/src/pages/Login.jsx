@@ -12,13 +12,29 @@ const Login = () => {
 	const onFinishHandler = async (values) => {
 		try{
 			dispatch(showLoading());
-			const res = await axios.post('/api/v1/user/login', values);
-			window.location.reload();
+			const res = await axios.post('/api/v1/user/login', values);	
 			dispatch(hideLoading());
 			if(res.data.success) {
 				localStorage.setItem('token', res.data.token);
 				message.success('Login Successfully!');
-				navigate('/');
+				const token = localStorage.getItem('token');
+				const config = { headers: { Authorization: `Bearer ${token}` } };
+				const userRes = await axios.post('/api/v1/user/getUserData', { userId: res.data.token ? res.data.token : "" }, config);
+				if (userRes.data.success) {
+				  const userData = userRes.data.data;
+				  if (userData.isAdmin) {
+					navigate('/admin/home')
+					window.location.reload()
+				  } else if (userData.isDoctor) {
+					navigate('/doctor/home')
+					window.location.reload()
+				  } else {
+					navigate('/');
+					window.location.reload()
+				  }
+				} else {
+				  navigate('/');
+				}
 			} else {
 				message.error(res.data.message);}
 		} catch (error) {
@@ -27,6 +43,7 @@ const Login = () => {
 			message.error('Something went wrong');
 	  }
 	}
+
   return (
 	<div className="form-container">
 		<Form layout="vertical" onFinish={onFinishHandler} className="register-form">
