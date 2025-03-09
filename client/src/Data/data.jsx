@@ -57,7 +57,7 @@ export const doctorMenu = [
 	},
 	{
 		name: "Profile",
-		path: `/doctor/profile/`,
+		path: `/doctor/profile`,
 		icon: "fa-solid fa-user"
 	},
 ]

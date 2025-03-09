@@ -50,7 +50,7 @@ const Layout = ({children}) => {
 							<i class="fa-solid fa-bell"></i>
 						</Badge>		
 						{user?.isDoctor ? (
-							<Link to={`/doctor/profile/`}>{user?.name}</Link>
+							<Link to={`/doctor/profile`}>{user?.name}</Link>
 						) : (
 							<Link to="/profile">{user?.name}</Link>)}
 					</div>

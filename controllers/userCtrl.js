@@ -77,7 +77,7 @@ const authController = async (req, res) => {
 			data:{
 				doctorId: newDoctor._id,
 				name: newDoctor.firstName + " " + newDoctor.lastName},
-			onClickPath: '/admin/doctors/'
+			onClickPath: '/admin/doctors'
 	})
 		await userModel.findByIdAndUpdate(adminUser._id,{notification})
 		res.status(201).send({success: true, message: "Application submitted successfully"})
