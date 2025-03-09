@@ -43,6 +43,25 @@ const DoctorAppointment = () => {
 		}
 	}
 
+	const handleDeleteAppointment = async (appointmentId) => {
+		try {
+			const res = await axios.post('/api/v1/user/deleteAppointment', { appointmentId }, {
+			headers: {
+			  Authorization: `Bearer ${localStorage.getItem('token')}`
+			}
+		})
+			if (res.data.success) {
+				message.success(res.data.message)
+				getAppointment()
+			} else {
+				message.error(res.data.message)
+			}
+		} catch (error) {
+			console.log(error)
+			message.error('Error deleting appointment')
+		}
+	  }
+
 	const columns = [
 			{
 				title: 'ID',
@@ -85,11 +104,13 @@ const DoctorAppointment = () => {
 				dataIndex: 'action',
 				render:(text,record) => (
 					<div className="d-flex">
-						{record.status === "pending" && (
+						{record.status === "pending" ? (
 							<div classname="d-flex">
 								<button className="btn btn-success" onClick={() => handleStatus(record, 'approved')}>Approve</button>
 								<button className="btn btn-danger ms-2" onClick={() => handleStatus(record, 'rejected')}>Reject</button>
 							</div>
+						) : (
+							<button className="btn btn-danger" onClick={() => handleDeleteAppointment(record._id)}>Delete</button>
 						)}
 					</div>
 				)
