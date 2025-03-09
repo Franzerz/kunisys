@@ -147,26 +147,53 @@ const authController = async (req, res) => {
 		res.status(500).send({success: false, error, message: "Error while booking appointment"})
 	}
   }
-
+  
 	const availabilityController = async (req, res) => {
 		try {
-		const fullDateTime = dayjs(`${req.body.date} ${req.body.time}`, 'DD-MM-YYYY HH:mm');
-		const fromTime = fullDateTime.subtract(15, 'minutes').toISOString();
-		const toTime = fullDateTime.add(15, 'minutes').toISOString();
-		const appointments = await appointModel.find({
+		  const fullDateTime = dayjs(`${req.body.date} ${req.body.time}`, 'DD-MM-YYYY HH:mm');
+		  const doctor = await doctorModel.findById(req.body.doctorId);
+		  if (!doctor) {
+			return res.status(404).send({ success: false, message: "Doctor not found" });
+		  }
+		  const requestedDate = dayjs(req.body.date, 'DD-MM-YYYY');
+		  const [startHour, startMinute] = doctor.time[0].split(':').map(Number);
+		  const [endHour, endMinute] = doctor.time[1].split(':').map(Number);
+		  const doctorStart = requestedDate.hour(startHour).minute(startMinute).second(0);
+		  const doctorEnd = requestedDate.hour(endHour).minute(endMinute).second(0);
+		  if (fullDateTime.isBefore(doctorStart) || fullDateTime.isAfter(doctorEnd)) {
+			return res.status(200).send({ 
+			  success: false, 
+			  message: "Selected time is outside doctor's available hours" 
+			});
+		  }
+		  const fromTime = fullDateTime.subtract(15, 'minutes').toISOString();
+		  const toTime = fullDateTime.add(15, 'minutes').toISOString();
+		  
+		  const appointments = await appointModel.find({
 			doctorId: req.body.doctorId,
 			time: { $gte: fromTime, $lte: toTime }
-		});
-		if (appointments.length > 0) {
-			return res.status(200).send({ success: false, message: "Doctor is not available at this time" });
-		} else {
-			return res.status(200).send({ success: true, message: "Doctor is available at this time" });
-		}
+		  });
+		  
+		  if (appointments.length > 0) {
+			return res.status(200).send({ 
+			  success: false, 
+			  message: "Doctor is not available at this time" 
+			});
+		  } else {
+			return res.status(200).send({ 
+			  success: true, 
+			  message: "Doctor is available at this time" 
+			});
+		  }
 		} catch (error) {
-		console.log(error);
-		res.status(500).send({ success: false, error, message: "Error while checking availability" });
+		  console.log(error);
+		  res.status(500).send({ 
+			success: false, 
+			error, 
+			message: "Error while checking availability" 
+		  });
 		}
-	}
+	  };
 
   const userAppointmentController = async (req, res) => {
 	try {

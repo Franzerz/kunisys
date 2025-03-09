@@ -10,7 +10,7 @@ import {showLoading, hideLoading} from '../redux/features/alertSlice'
 const BookingPage = () => {
 	const {user} = useSelector(state => state.user)
 	const params = useParams();
-	const [doctors, setDoctors] = useState([]);
+	const [doctor, setDoctor] = useState([]);
 	const [date, setDate] = useState();
 	const [time, setTime] = useState();
 	const [available, setAvailable] = useState();
@@ -24,7 +24,7 @@ const BookingPage = () => {
 				}
 			})
 			if(res.data.success){
-				setDoctors(res.data.data)
+				setDoctor(res.data.data)
 			}
 		} catch (error) {
 			console.log(error);
@@ -33,58 +33,68 @@ const BookingPage = () => {
 
 	const handleAvailability = async () => {
 		try {
-			dispatch(showLoading())
+			if (!date || !time) {
+				return message.error("Please select both date and time");
+			}
+			if (!available) {}
+			dispatch(showLoading());
 			const res = await axios.post('/api/v1/user/availability', {
 				doctorId: params.doctorId,
 				date,
 				time
-			}, {
-				headers: {
-					'Authorization': `Bearer ${localStorage.getItem('token')}`
-				}
-			})
-			dispatch(hideLoading())
-			if(res.data.success){
-				setAvailable(true)
-				console.log(available)
-				message.success(res.data.message)
-			} else{
-				message.error(res.data.message)
+			}, { headers: {
+			  'Authorization': `Bearer ${localStorage.getItem('token')}`
+			}
+		});
+			dispatch(hideLoading());
+			if (res.data.success) {
+				setAvailable(true);
+				message.success(res.data.message);
+			} else {
+				setAvailable(false);
+				message.error(res.data.message);
 			}
 		} catch (error) {
-			dispatch(hideLoading())
-			console.log(error)
-		}
-	}
-
-	const handleBooking = async () => {
-		try {
-			setAvailable(true);
-			if (!date && !time) {
-				return alert("Date & Time Required");
-			}
-			dispatch(showLoading())
-			const res = await axios.post('/api/v1/user/appointment', {
-				doctorId: params.doctorId,
-				userId: user._id,
-				doctorInfo: doctors,
-				userInfo: user,
-				date: date,
-				time:time
-			}, {
-				headers: {
-					'Authorization': `Bearer ${localStorage.getItem('token')}`
-				}
-			})
-			dispatch(hideLoading())
-			if(res.data.success){
-				message.success(res.data.message)
-			}
-		} catch (error) {
-			dispatch(hideLoading())
+			dispatch(hideLoading());
 			console.log(error);
 		}
-	}
+	  }
+	
+	const handleBooking = async () => {
+		if (!date || !time) {
+			return alert("Date & Time Required");
+		}
+		try {
+			dispatch(showLoading());
+			const availRes = await axios.post('/api/v1/user/availability',
+			{ doctorId: params.doctorId, date, time },
+			{ headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
+			);
+			dispatch(hideLoading());
+			if (!availRes.data.success) {
+				return alert("Selected timeslot is not available. Please check availabilty first.");
+			}
+			dispatch(showLoading());
+			const res = await axios.post('/api/v1/user/appointment',
+			{
+				doctorId: params.doctorId,
+				userId: user._id,
+				doctorInfo: doctor,
+				userInfo: user,
+				date: date,
+				time: time
+			},
+			{ headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
+			);
+			dispatch(hideLoading());
+			if (res.data.success) {
+				message.success(res.data.message);
+			}
+		} catch (error) {
+			dispatch(hideLoading());
+			console.log(error);
+		}
+	  }
 
 	useEffect(() => {
 		getUserData();
@@ -94,11 +104,11 @@ const BookingPage = () => {
 	<Layout>
 		<h3>Booking Page</h3>
 		<div className="container m-2">
-			{doctors && (
+			{doctor && (
 				<div>
-					<h4>Dr. {doctors.firstName} {doctors.lastName}</h4>
-					<h4>Specialization: {doctors.specialization}</h4>
-					<h4>Available Timeslot: {doctors.time && doctors.time[0]} - {doctors.time && doctors.time[1]}</h4>
+					<h4>Dr. {doctor.firstName} {doctor.lastName}</h4>
+					<h4>Specialization: {doctor.specialization}</h4>
+					<h4>Available Timeslot: {doctor.time && doctor.time[0]} - {doctor.time && doctor.time[1]}</h4>
 					<div className="d-flex flex-column w-50">
 						<DatePicker className= "m-2" format="DD-MM-YYYY" onChange={(value) => {
 							
