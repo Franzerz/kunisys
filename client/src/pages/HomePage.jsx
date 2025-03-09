@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Tabs, Calendar, Row } from 'antd';
 import axios from 'axios';
 import DoctorList from '../components/DoctorList';
-import Layout from '../components/Layout';
+import UserLayout from '../components/UserLayout';
 import dayjs from 'dayjs';
 const { TabPane } = Tabs;
 
@@ -75,7 +75,7 @@ const HomePage = () => {
 	}
   
 	return (
-		<Layout>
+		<UserLayout>
 		<Tabs defaultActiveKey="1">
 			<TabPane tab="Doctors" key="1">
 			<Row>
@@ -87,7 +87,7 @@ const HomePage = () => {
 				<Calendar cellRender={cellRender} />
 			</TabPane>
 		</Tabs>
-		</Layout>
+		</UserLayout>
 	);
 }
 	  

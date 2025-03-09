@@ -14,6 +14,7 @@ const { loginController,
 		forgotPasswordController,
 		resetPasswordController,
 		deleteAppointmentController,
+		getDoctorAppointmentsByDay,
 	} = require('../controllers/userCtrl')
 const authMiddleware = require("../middlewares/authMiddleware");
 const { get } = require('mongoose');
@@ -65,5 +66,8 @@ router.post('/resetPassword', resetPasswordController);
 
 // Delete Appointment || POST
 router.post('/deleteAppointment', authMiddleware, deleteAppointmentController);
+
+// Get Doctor Appointments By Day || POST
+router.post('/getDoctorAppointmentsByDay', authMiddleware, getDoctorAppointmentsByDay);
 
 module.exports = router;

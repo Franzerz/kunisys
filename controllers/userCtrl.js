@@ -320,6 +320,29 @@ const authController = async (req, res) => {
 	}
   }
 
+  const getDoctorAppointmentsByDay = async (req, res) => {
+	try {
+	  const { doctorId, date } = req.body;
+	  const startOfDay = dayjs(date, 'DD-MM-YYYY').startOf('day').toISOString();
+	  const endOfDay = dayjs(date, 'DD-MM-YYYY').endOf('day').toISOString();
+	  const appointments = await appointModel.find({
+		doctorId,
+		date: { $gte: startOfDay, $lte: endOfDay }
+	  });
+	  res.status(200).send({ 
+		success: true, 
+		data: appointments, 
+		message: "Appointments fetched successfully" 
+	  });
+	} catch (error) {
+	  res.status(500).send({ 
+		success: false, 
+		message: "Error fetching appointments", 
+		error: error.message 
+	  });
+	}
+  }
+
 module.exports = {
 	loginController, 
 	registerController, 
@@ -335,5 +358,6 @@ module.exports = {
 	changePasswordController,
 	forgotPasswordController,
 	resetPasswordController,
-	deleteAppointmentController
+	deleteAppointmentController,
+	getDoctorAppointmentsByDay
 };
