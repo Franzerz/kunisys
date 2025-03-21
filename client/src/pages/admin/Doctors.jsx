@@ -53,6 +53,7 @@ const Doctors = () => {
 			<span>{record.firstName} {record.lastName}</span>
 		  )
 		},
+		{ title: 'Specialization', dataIndex: 'specialization' },
 		{ title: 'Status', dataIndex: 'status' },
 		{ title: 'Phone', dataIndex: 'phone' },
 		{
@@ -76,7 +77,7 @@ const Doctors = () => {
   return (
 	<Layout>
 		<div className="ListofDoctors-button">List of Doctors</div>
-		<Table columns={columns} dataSource={doctors} />
+		<Table className="custom-table" columns={columns} dataSource={doctors} />
 	</Layout>
   )
 }

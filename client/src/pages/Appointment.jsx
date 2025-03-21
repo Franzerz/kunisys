@@ -3,6 +3,7 @@ import axios from 'axios'
 import Layout from '../components/Layout'
 import dayjs from 'dayjs'
 import { Table, message } from 'antd'
+import '../styles/Calendar.css';
 
 const Appointment = () => {
 	const [appointment, setAppointment] = useState([])
@@ -100,7 +101,7 @@ const Appointment = () => {
   return (
 	<Layout>
 		<div className="ListofDoctors-button">Appointment Lists</div>
-		<Table columns={columns} dataSource={appointment} />
+		<Table className="custom-table" columns={columns} dataSource={appointment} />
 	</Layout>
   )
 }

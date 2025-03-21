@@ -120,7 +120,7 @@ const DoctorAppointment = () => {
   return (
 	<Layout>
 		<div className="ListofDoctors-button">Appointment Lists</div>
-		<Table columns={columns} dataSource={appointment} />
+		<Table className="custom-table" columns={columns} dataSource={appointment} />
 	</Layout>
   )
 }
