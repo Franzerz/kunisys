@@ -70,9 +70,9 @@ const Login = () => {
             <div className="blurred-background"></div>
             <div className="content-wrapper">
 			<div className="logo-container">
-				<div className="logo"></div>
-				<Link className="logo2" to="/welcome" aria-label="Go to Welcome page"></Link>
-			</div>
+                <Link className="logo" to="/welcome" aria-label="Go to Welcome page"></Link>
+ 				<Link className="logo2" to="/welcome" aria-label="Go to Welcome page"></Link>
+ 			</div>
                 <div className="main-container">
                     <div className="left-section">
                         <div className="tabs">

@@ -72,6 +72,8 @@ const UserProfile = () => {
 	<Tabs className="custom-tabs" defaultActiveKey="1">
 	  <Tabs.TabPane tab="Profile" key="1">
 		{userInfo && (
+			 <div className="cardprofile">
+ 		  <div className="ListofDoctors-button">Personal Details :</div>
 		  <Form
 			layout="vertical"
 			onFinish={handleProfileFinish}
@@ -82,23 +84,24 @@ const UserProfile = () => {
 			}}
 		  >
 			<Row gutter={20}>
-			  <Col xs={24} md={24} lg={8}>
+			  <Col xs={24} md={24} lg={24}>
 				<Form.Item label="Name" name="name" rules={[{ required: true, message: 'Name is required' }]}>
 				  <Input placeholder="Enter your name" />
 				</Form.Item>
 			  </Col>
-			  <Col xs={24} md={24} lg={8}>
+			  <Col xs={24} md={24} lg={24}>
 				<Form.Item label="Email" name="email" rules={[{ required: true, message: 'Email is required' }]}>
 				  <Input type="email" placeholder="Enter your email" />
 				</Form.Item>
 			  </Col>
-			  <Col xs={24} md={24} lg={8}>
+			  <Col xs={24} md={24} lg={24}>
 				<button type="submit" className="btn btn-primary form-btn">
 				  Submit
 				</button>
 			  </Col>
 			</Row>
 		  </Form>
+		  </div>
 		)}
 	  </Tabs.TabPane>
 	  <Tabs.TabPane tab="Change Password" key="2">

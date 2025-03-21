@@ -163,6 +163,41 @@
 	background-color: #388e3c;
   }
   
+ .cardprofile {
+	background-color: #ffffff;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	padding: 20px;
+	max-width: 1500px;
+	margin: 20px auto;
+  }
+
+  .cardprofile .form-item {
+	margin-bottom: 15px;
+  }
+  
+  .cardprofile .form-item input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 16px;
+  }
+  
+  .cardprofile .form-btn {
+	background-color: #007bff;
+	border: none;
+	color: white;
+	padding: 10px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	width: 100%;
+  }
+  
+  .cardprofile .form-btn:hover {
+	background-color: #0056b3;
+  }
   
   @media (max-width: 768px) {
 	.card {

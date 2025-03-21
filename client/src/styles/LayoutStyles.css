@@ -36,6 +36,12 @@
 	background-color: white;
 }
 
+h6 {
+	font-size: 16px; /* Font size for the text */
+	font-weight: bold; /* Makes the text bold */
+	margin: 0; /* Removes default margins for proper alignment */
+}
+
 .logo h6{
 	font-size: 1.5rem;
 	text-align: center;
@@ -92,119 +98,132 @@
 }
 
 .ant-tabs-tab {
-	background-color: #add8e6; /* Light blue background */
-	border: 1px solid #add8e6; /* Match border with background color */
-	border-radius: 5px; /* Rounded corners */
-	color: #000; /* Black text color */
+	background-color: #add8e6;
+	border: 1px solid #add8e6;
+	border-radius: 5px;
+	color: #000;
 	text-align: center;
-	padding: 5px 25px; /* Button padding */
-	margin-right: -15px; /* Adjust the gap between buttons (increase or decrease value) */
+	padding: 5px 25px;
+	margin-right: -15px;
 	margin-top: 10px; 
 	margin-left: 10px; 
 	margin-bottom: 10px; 
 	cursor: pointer;
-	transition: background-color 0.3s, color 0.3s ease; /* Smooth hover effect */
+	transition: background-color 0.3s, color 0.3s ease;
   }
   
   
-  /* Hover effect for all tabs */
   .ant-tabs-tab:hover {
-	background-color: #b0e0e6; /* Slightly lighter blue for hover */
-	color: #333; /* Darker text color on hover */
+	background-color: #b0e0e6;
+	color: #333;
   }
   
-  /* Active tab styling */
   .ant-tabs-tab-active {
-	background-color: #87cefa; /* Slightly darker blue for the active tab */
-	color: white; /* White text for the active tab */
-	border-color: #87cefa; /* Match border with active background color */
+	background-color: #87cefa; 
+	color: white; 
+	border-color: #87cefa; 
   }
   
-  /* Profile tab specific styles */
   .custom-tabs .ant-tabs-tab:nth-child(1) {
-	background-color: #ADE8F4; /* Light blue */
+	background-color: #ADE8F4;
 	font-family: 'Montserrat', sans-serif;
-	color: #000; /* Black text */
-	font-size: 16px; /* Increase font size for better readability */
-	text-align: center; /* Center-align the text */
-	padding: 1px 25px; /* Add padding for a button-like look */
-	border: 2px solid #ADE8F4; /* Add a border with a complementary color */
+	color: #000;
+	font-size: 16px;
+	text-align: center; 
+	padding: 1px 25px; 
+	border: 2px solid #ADE8F4;
 	border-radius: 20px;
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
-	transition: all 0.3s ease; /* Smooth transition for hover effects */
-	cursor: pointer; /* Change cursor to pointer for interactivity */
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
   }
 
-	/* Active styling for "Change Password" tab */
 	.custom-tabs .ant-tabs-tab-active:nth-child(1) {
-		background-color: #6ED2E6; /* Slightly darker blue for active state */
-		color: white; /* White text for active state */
-		border-color: #6ED2E6; /* Match border with active background */
+		background-color: #6ED2E6;
+		color: white;
+		border-color: #6ED2E6;
 	  }
   
-  /* Hover effect for the "Profile" tab */
   .custom-tabs .ant-tabs-tab:nth-child(1):hover {
-	background-color: #6ED2E6; /* Slightly lighter blue */
-	border-color: #6ED2E6; /* Match border with active background */
-	color: #333; /* Darker text color on hover */
-	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
-	transform: scale(1.05); /* Slightly enlarge the tab for hover effect */
+	background-color: #6ED2E6;
+	border-color: #6ED2E6;
+	color: #333;
+	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+	transform: scale(1.05);
   }
   
-  /* Change Password tab specific styles */
   .custom-tabs .ant-tabs-tab:nth-child(2) {
-	background-color: #ADE8F4; /* Light blue background (same as Profile) */
+	background-color: #ADE8F4;
 	font-family: 'Montserrat', sans-serif;
-	color: #000; /* Black text color */
-	font-size: 16px; /* Same font size as Profile */
-	text-align: center; /* Center-align the tab text */
-	padding: 10px 25px; /* Button-like padding */
-	border: 2px solid #ADE8F4; /* Slightly darker blue border for contrast */
+	color: #000;
+	font-size: 16px;
+	text-align: center;
+	padding: 10px 25px;
+	border: 2px solid #ADE8F4;
 	border-radius: 20px;
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-	transition: all 0.3s ease; /* Smooth hover effect */
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
 	margin-top: 10px; 
 	margin-left: 30px; 
 	margin-bottom: 10px; 
-	cursor: pointer; /* Pointer cursor for interactivity */
+	cursor: pointer;
   }
   
-  /* Hover effect for "Change Password" tab */
   .custom-tabs .ant-tabs-tab:nth-child(2):hover {
-	background-color: #6ED2E6; /* Slightly lighter blue for hover */
-	border-color: #6ED2E6; /* Match border with active background */
-	color: #333; /* Darker text color */
-	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-	transform: scale(1.05); /* Slightly enlarge tab for hover effect */
+	background-color: #6ED2E6; 
+	border-color: #6ED2E6; 
+	color: #333;
+	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); 
+	transform: scale(1.05); 
   }
   
   /* Active styling for "Change Password" tab */
   .custom-tabs .ant-tabs-tab-active:nth-child(2) {
-	background-color: #6ED2E6; /* Slightly darker blue for active state */
-	color: white; /* White text for active state */
-	border-color: #6ED2E6; /* Match border with active background */
+	background-color: #6ED2E6;
+	color: white; 
+	border-color: #6ED2E6;
   }
   
-  /* Remove the blue underline (default Ant Design ink bar) */
+ 
   .custom-tabs .ant-tabs-ink-bar {
-	display: none; /* Completely hides the underline */
+	display: none;
   }
   
-  /* Customize the underline if you want to keep it */
+
   .custom-tabs .ant-tabs-ink-bar {
-	background-color: #87cefa; /* Change the underline color */
-	height: 3px; /* Adjust the thickness */
-	border-radius: 2px; /* Add rounded corners */
+	background-color: #87cefa;
+	height: 3px;
+	border-radius: 2px;
   }
-  /* Active styling specifically for the first and second tabs */
+
 .custom-tabs .ant-tabs-tab-active:nth-child(1) .ant-tabs-tab-btn,
 .custom-tabs .ant-tabs-tab-active:nth-child(2) .ant-tabs-tab-btn {
-  color: #000; /* Black text color when active */
+  color: #000;
 }
 
-/* Default styling for both tabs */
 .custom-tabs .ant-tabs-tab:nth-child(1) .ant-tabs-tab-btn,
 .custom-tabs .ant-tabs-tab:nth-child(2) .ant-tabs-tab-btn {
-  color: #000; /* Default black text color */
-  transition: color 0.3s ease; /* Smooth transition effect */
+  color: #000;
+  transition: color 0.3s ease;
 }
+
+.logo3 {
+	width: 120px;
+	height: 60px;
+	background: url('../images/Logowhite.png') no-repeat center center/contain;
+	margin: 10px auto;
+	position: relative;
+	top: 0px;
+	}
+	
+.logo-container2 {
+	display: flex;
+	align-items: center;
+	}
+	
+.logo4 {
+	width: 60px;
+	height: 60px;
+	background: url('../images/KQueLogowhite.png') no-repeat center center/contain;
+	margin-left: 30px;
+	margin-right: 10px;
+	}
