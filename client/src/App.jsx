@@ -19,6 +19,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import DoctorHomePage from './pages/doctors/DoctorHomePage';
 import AdminHomePage from './pages/admin/AdminHomePage';
+import Welcome from './pages/Welcome';
 
 function App() {
   const {loading} = useSelector(state => state.alerts);
@@ -43,6 +44,7 @@ function App() {
       <Route path="/reset-password/:token" element={<PublicRoute><ResetPassword /></PublicRoute>} />
       <Route path="/doctor/home" element={<ProtectedRoute><DoctorHomePage /></ProtectedRoute>} />
       <Route path="/admin/home" element={<ProtectedRoute><AdminHomePage /></ProtectedRoute>} />
+      <Route path="/welcome" element={<PublicRoute><Welcome /></PublicRoute>} />
     </Routes>
     }
     </BrowserRouter>

@@ -1,0 +1,445 @@
+/* General Styles */
+/* Update: 2025-03-14 - Attempting to fix header display issue */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+/* Main container */
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+/* Logo in top left */
+.logowelcome {
+    width: 120px;
+    height: 60px;
+    background: url('../images/Logo.png') no-repeat center center;
+    background-size: contain;
+    position: fixed;
+    top: 20px;
+    left: 1px;
+    z-index: 1000;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.logowelcome:hover {
+    transform: scale(1.1);
+}
+
+/* Top right buttons */
+.top-right-buttons {
+    position: fixed; /* Changed to fixed */
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+
+.right-corner-btn {
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #ffffff;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.right-corner-btn:first-child {
+    background-color: #ff7f2a;
+}
+
+.right-corner-btn:last-child {
+    background-color: #4CB6AC;
+}
+
+.right-corner-btn:hover {
+    transform: scale(1.05);
+}
+
+
+.logokqueue {
+        padding-left: 0px;
+        max-width: 500px;
+    }
+
+    /* KQue logo as an image */
+.kque-logo {
+        width: 120px;
+        height: 60px;
+        background: url('../images/KQueLogo.png') no-repeat center center;
+        background-size: contain;
+        margin-bottom: 15px;
+    }
+
+.logokqueue p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    margin: 0;
+}
+
+/* Feature sections container */
+.feature-sections {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 30px;
+}
+
+/* Sport section styling */
+.sport-section {
+    display: flex;
+    flex-direction: row; /* Changed to row for better layout */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px; /* Added padding for better spacing */
+}
+
+.section-images {
+    display: flex;
+    height: 200px;
+    width: 40%; /* Set width for images section */
+}
+
+.section-content {
+    padding: 20px;
+    width: 60%; /* Set width for content section */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section-content h2 {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #1e1e1e;
+    margin-bottom: 20px;
+    text-align: left; /* Ensures the text is aligned to the left */
+}
+
+
+/* Thai language section */
+.thai-section {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: right;
+}
+
+.thai-content h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.thai-content p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Hospital section styling */
+.hospital-section {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 0 0 20px 0;
+    margin-bottom: 30px;
+}
+
+.hospital-image {
+    width: 100%;
+    height: 250px;
+    background-image: url('../images/Hospital2.jpg');
+    background-size: cover;
+    background-position: center 35%; /* Adjust crop to be higher */
+}
+
+.info-boxes {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.info-box {
+    flex: 1;
+    min-width: 200px;
+    padding: 15px;
+    text-align: center;
+    margin: 15px 10px; /* Adds space around each info-box */
+    background-color: #ececec; /* Optional: Make each box visually distinct */
+    border-radius: 10px; /* Keep the rounded corners */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
+}
+
+
+.icon-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    position: relative;
+}
+
+/* Icon styles */
+.icon-clock, .icon-contact, .icon-location {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+.icon-clock {
+    background-image: url('../images/icon\ _clock.png');
+}
+
+.icon-contact {
+    background-image: url('../images/iconpeople.png');
+}
+
+.icon-location {
+    background-image: url('../images/iconlocation.png');
+}
+
+.thecontainer {
+    display: flex;
+    justify-content: center; /* Centers the content horizontally */
+    align-items: center; /* Centers the content vertically */
+    gap: 15px; /* Adds spacing between the info boxes */
+    flex-wrap: wrap; /* Ensures wrapping for smaller screens */
+    padding: 20px;
+    background-color: #f9f9f9; /* Optional background color */
+    border-radius: 15px; /* Rounds the corners of the container */
+    margin: 0 auto; /* Centers the container horizontally */
+    max-width: 800px; /* Sets a max width for the container */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for a polished look */
+}
+
+
+.info-box h3 {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.info-box p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Button styling */
+.login-register-btn {
+    display: inline-block;
+    background-color: #ff7f2a;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+.login-register-btn:hover {
+    background-color: #e5702a;
+}
+
+.hospital-btn {
+    background-color: #4CB6AC;
+    margin: 10px auto;
+    display: block;
+    max-width: 200px;
+}
+
+.hospital-btn:hover {
+    background-color: #409a91;
+}
+
+/* Footer styling */
+.footer-section {
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+}
+
+.footer-section p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Slider container styles */
+.slider-container {
+    position: relative;
+    width: 100%; /* Matches the width of .sport-section */
+    height: 100%;; /* Matches the height of .sport-section */
+    margin: 0; /* Removes extra spacing to blend seamlessly */
+    overflow: hidden;
+    border-radius: 8px; /* Matches the border-radius of .sport-section */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Matches the shadow of .sport-section */
+    padding: 20px; /* Optional, to align with .sport-section's spacing */
+}
+
+  
+  /* Slider wrapper for sliding effect */
+  .slider-wrapper {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+  }
+  
+  /* Individual slider image */
+  .slider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  
+  /* Arrow button styles */
+  /* Arrow button styles */
+  .arrow {
+    position: absolute;
+    top: 55%; /* Increased percentage to move arrows lower */
+    transform: translateY(-50%); /* Keeps the arrows centered vertically based on their new position */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+  
+  .left-arrow {
+    left: 10px;
+  }
+  
+  .right-arrow {
+    right: 10px;
+  }
+  
+  .arrow:hover {
+    background: linear-gradient(135deg, rgba(50, 50, 50, 0.8), rgba(0, 0, 0, 0.8)); /* Keeps the modern gradient */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Adds depth without movement */
+    transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for visual changes */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 100px 20px 40px;
+    }
+
+    .logokqueue {
+        padding-left: 0;
+        padding-top: 20px;
+    }
+
+    .kque-logo {
+        margin: 0 auto 15px;
+        width: 100px;
+        height: 50px;
+    }
+
+    .logokqueue p {
+        font-size: 14px;
+    }
+
+     .logokqueue {
+        padding-left: 0;
+        max-width: 100%;
+    }
+    
+    .sport-section {
+        flex-direction: column;
+    }
+    
+    .section-images, .section-content {
+        width: 100%;
+    }
+
+    .info-boxes {
+        flex-direction: column;
+    }
+
+    .info-box {
+        margin-bottom: 20px;
+    }
+    .hospital-image {
+        height: auto; /* Make height responsive */
+    }
+
+    .top-right-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .header-image {
+        width: 200px;
+        height: 150px;
+    }
+
+       .hospital-image {
+        height: auto; /* Make height responsive */
+    }
+
+    .kque-logo {
+        width: 100px;
+        height: 50px;
+    }
+    .logokqueue {
+        padding-left: 0;
+        max-width: 100%;
+    }
+    .logokqueue p {
+        font-size: 12px;
+    }
+
+    .section-images {
+        height: 120px;
+    }
+
+    .section-content h2 {
+        font-size: 14px;
+    }
+}
