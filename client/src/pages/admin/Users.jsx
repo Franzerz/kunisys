@@ -2,6 +2,7 @@ import React, {useEffect,useState} from 'react'
 import Layout from '../../components/Layout'
 import axios from 'axios'
 import { Table, message } from 'antd';
+import '../../styles/Calendar.css';
 
 
 const Users = () => {
@@ -88,7 +89,7 @@ const Users = () => {
 	
   return (
 	<Layout>
-		<h1 className="text-center m-2">User List</h1>
+		<div className="ListofDoctors-button">User Lists</div>
 		<Table columns={columns} dataSource={users} />
 	</Layout>
   )

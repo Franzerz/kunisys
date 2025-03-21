@@ -47,9 +47,8 @@ const Welcome = () => {
 
                             <div className="info-box">
                                 <div className="icon-circle">
-                                    <span className="icon-clock" aria-hidden="true"></span>
+									<span className="icon-clock" aria-hidden="true"><h3>Open Hours</h3></span>
                                 </div>
-                                <h3>Open Hours</h3>
                                 <p>Monday to Friday and holiday<br />
                                 (09:00 am - 05:00 pm)<br />
                                 Saturday to Sunday<br />
@@ -57,18 +56,16 @@ const Welcome = () => {
                             </div>
                             <div className="info-box">
                                 <div className="icon-circle">
-                                    <span className="icon-contact" aria-hidden="true"></span>
+									<span className="icon-contact" aria-hidden="true"><h3>Contacts</h3></span>
                                 </div>
-                                <h3>Contacts</h3>
                                 <p><i className="fab fa-facebook"></i> ศูนย์การแพทย์ สจล. KMITL Medical center<br />
                                 <p><i className="fas fa-globe"></i>  <a href="http://medicalcenter.kmitl.ac.th/service/" target="_blank" rel="noopener noreferrer">http://medicalcenter.kmitl.ac.th/service/</a></p>
                                 <i className="fas fa-phone"></i> Tel: 02-3298145, 02 329 8000 - 9633</p>
                             </div>
                             <div className="info-box">
                                 <div className="icon-circle">
-                                    <span className="icon-location" aria-hidden="true"></span>
+									<span className="icon-location" aria-hidden="true"><h3>Location</h3></span>
                                 </div>
-                                <h3>Location</h3>
                                 <p>Address: 3 Thanon Chalong Krung,<br />
                                 Lat Krabang, Bangkok 10520<br />
                                 Located at: King Mongkut's Institute of Technology Ladkrabang</p>

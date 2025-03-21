@@ -34,8 +34,17 @@ const Login = () => {
                     config
                 );
                 if (userRes.data.success) {
-                    navigate('/')
-					window.location.reload();
+					const userData = userRes.data.data;
+                    if (userData.isAdmin) {
+                        navigate('/admin/home');
+                        window.location.reload();
+                    } else if (userData.isDoctor) {
+                        navigate('/doctor/home');
+                        window.location.reload();
+                    } else {
+                        navigate('/');
+                        window.location.reload();
+                    }
                 } else {
                     navigate('/');
                 }

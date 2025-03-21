@@ -58,7 +58,7 @@ const DoctorHomePage = () => {
 
   return (
     <Layout>
-      <h1>Work Calendar</h1>
+      <div className="calendar-button">Work Calendar</div>
       <Calendar cellRender={cellRender} />
     </Layout>
   );

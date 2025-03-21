@@ -2,6 +2,7 @@ import React, {useEffect,useState} from 'react'
 import Layout from '../../components/Layout'
 import axios from 'axios'
 import { message, Table } from 'antd';
+import '../../styles/Calendar.css';
 
 const Doctors = () => {
 	const [doctors, setDoctors] = useState([]);
@@ -74,7 +75,7 @@ const Doctors = () => {
 	
   return (
 	<Layout>
-		<h1 className="text-center m-2">All Doctors</h1>
+		<div className="ListofDoctors-button">List of Doctors</div>
 		<Table columns={columns} dataSource={doctors} />
 	</Layout>
   )

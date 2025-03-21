@@ -3,6 +3,7 @@ import Layout from '../../components/Layout';
 import { Calendar, message } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import '../../styles/Calendar.css';
 
 const AdminHomePage = () => {
   const [appointments, setAppointments] = useState([]);
@@ -41,13 +42,7 @@ const AdminHomePage = () => {
         {dayApps.map((app, index) => (
           <div
             key={index}
-            style={{
-              background: '#ffd591',
-              marginBottom: 2,
-              padding: '2px 4px',
-              borderRadius: 2,
-              fontSize: 12,
-            }}
+            className="appointment"
           >
             {app.userInfo.name} booked with Dr. {app.doctorInfo.firstName} {app.doctorInfo.lastName} @ {dayjs(app.date).format('HH:mm')}
           </div>
@@ -58,7 +53,7 @@ const AdminHomePage = () => {
 
   return (
     <Layout>
-      <h1>All Activities</h1>
+      <div className="calendar-button">Calendar</div>
       <Calendar cellRender={cellRender} />
     </Layout>
   );

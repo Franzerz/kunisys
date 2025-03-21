@@ -102,28 +102,25 @@ const BookingPage = () => {
 	}, [])
   return (
 	<Layout>
-		<h3>Booking Page</h3>
-		<div className="container m-2">
-			{doctor && (
-				<div>
-					<h4>Dr. {doctor.firstName} {doctor.lastName}</h4>
-					<h4>Specialization: {doctor.specialization}</h4>
-					<h4>Available Timeslot: {doctor.time && doctor.time[0]} - {doctor.time && doctor.time[1]}</h4>
-					<div className="d-flex flex-column w-50">
-						<DatePicker className= "m-2" format="DD-MM-YYYY" onChange={(value) => {
-							
-							setDate(dayjs(value).format('DD-MM-YYYY'))}
-						} />
-						<TimePicker className= "m-2" format="HH:mm" onChange={(value) => {
-							
-							setTime(dayjs(value).format('HH:mm'))}
-						}/>
-						<button className='btn btn-primary mt-2' onClick={handleAvailability}>Check Availability</button>
-						<button className='btn btn-dark mt-2' onClick={handleBooking}>Book Now</button>
-					</div>
-				</div>
-			)}
-		</div>
+		<div className="ListofDoctors-button">Booking Page</div>
+ 		<div className="container">
+     <div className="card">
+         {doctor && (
+             <div className="card-body">
+                 <div className="card-header">
+ 				Dr. {doctor.firstName} {doctor.lastName}</div>
+                 <p><b>Specialization:</b> {doctor.specialization}</p>
+ 				<p><b>Phone:</b> {doctor.phone}</p>
+ 				<p><b>Email:</b> {doctor.email}</p>
+                 <p><b>Available Timeslot:</b> {doctor.time && doctor.time[0]} - {doctor.time && doctor.time[1]}</p>
+                 <DatePicker className="form-control my-2" format="DD-MM-YYYY" onChange={(value) => setDate(dayjs(value).format('DD-MM-YYYY'))} />
+                 <TimePicker className="form-control my-2" format="HH:mm" onChange={(value) => setTime(dayjs(value).format('HH:mm'))} />
+                 <button className="btn btn-primary w-100 mt-2" onClick={handleAvailability}>Check Availability</button>
+                 <button className="btn btn-dark w-100 mt-2" onClick={handleBooking}>Book Now</button>
+             </div>
+         )}
+     </div>
+ </div>
 	</Layout>
   )
 }

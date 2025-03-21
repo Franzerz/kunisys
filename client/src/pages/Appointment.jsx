@@ -99,7 +99,7 @@ const Appointment = () => {
 
   return (
 	<Layout>
-		<h1>Appointment Lists</h1>
+		<div className="ListofDoctors-button">Appointment Lists</div>
 		<Table columns={columns} dataSource={appointment} />
 	</Layout>
   )

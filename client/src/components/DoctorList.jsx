@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../styles/Calendar.css';
 
 const DoctorList = ({doctor}) => {
 	const navigate = useNavigate()

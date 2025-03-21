@@ -76,14 +76,13 @@ const HomePage = () => {
   
 	return (
 		<UserLayout>
-		<Tabs defaultActiveKey="1">
+		<Tabs className="custom-tabs" defaultActiveKey="1">
 			<TabPane tab="Doctors" key="1">
 			<Row>
 				{doctors && doctors.map((doctor) => <DoctorList doctor={doctor} />)}
 			</Row>
 			</TabPane>
 			<TabPane tab="My Bookings" key="2">
-				<h2>My Bookings Calendar</h2>
 				<Calendar cellRender={cellRender} />
 			</TabPane>
 		</Tabs>

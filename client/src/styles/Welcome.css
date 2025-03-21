@@ -7,6 +7,17 @@ body {
     box-sizing: border-box;
 }
 
+a {
+    word-break: break-word; /* Ensures long links wrap onto the next line if necessary */
+    color: #007BFF; /* Modern link color */
+    text-decoration: none; /* Removes underline for a clean look */
+    font-size: 14px; /* Adjusts font size for readability on small screens */
+}
+
+a:hover {
+    text-decoration: underline; /* Adds underline on hover to indicate interactivity */
+}
+
 /* Main container */
 .welcome-container {
     display: flex;
@@ -184,7 +195,7 @@ body {
     flex: 1;
     min-width: 200px;
     padding: 15px;
-    text-align: center;
+    text-align: left;
     margin: 15px 10px; /* Adds space around each info-box */
     background-color: #ececec; /* Optional: Make each box visually distinct */
     border-radius: 10px; /* Keep the rounded corners */
@@ -192,19 +203,12 @@ body {
 }
 
 
-.icon-circle {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 10px;
-    position: relative;
+.icon-container {
+    display: flex; /* Enables Flexbox for layout */
+    align-items: center; /* Centers icons and text vertically */
+    justify-content: flex-start; /* Aligns items to the left */
 }
 
-/* Icon styles */
 .icon-clock, .icon-contact, .icon-location {
     width: 20px;
     height: 20px;
@@ -212,6 +216,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     display: inline-block;
+    margin-right: 10px; /* Adds space between the icon and its content */
 }
 
 .icon-clock {
@@ -243,8 +248,10 @@ body {
 
 .info-box h3 {
     font-size: 16px;
-    margin: 10px 0;
+    margin: 0; /* Removes top and bottom margin to keep alignment */
     color: #333;
+    white-space: nowrap; /* Ensures the text stays on one line */
+    margin-left: 30px; /* Moves the text slightly to the right */
 }
 
 .info-box p {

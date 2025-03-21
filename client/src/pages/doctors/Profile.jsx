@@ -93,8 +93,7 @@ const Profile = () => {
 	}, [])
   return (
 	<Layout>
-      <h1>Manage Profile</h1>
-      <Tabs defaultActiveKey="1">
+      <Tabs className="custom-tabs" defaultActiveKey="1">
         <Tabs.TabPane tab="Profile" key="1">
           {doctor && (
             <Form

@@ -57,8 +57,7 @@ const NotificationPage = () => {
 	}
   return (
 	<Layout>
-		<h4 className="p-3 text-center">Notification Page</h4>
-		<Tabs>
+		<Tabs className="custom-tabs">
 			<Tabs.TabPane tab="Unread" key={0}>
 				<div className="d-flex justify-content-end">
 					<h4 className="p-2 text-primary" style={{cursor:'pointer'}} onClick={handleMarkAllRead}>Mark All Read</h4>

@@ -61,8 +61,10 @@ const UserLayout = ({ children }) => {
     <div className="main">
       <div className="layout">
         <div className="sidebar">
-          <div className="logo">
-            <h6>Kunisys</h6>
+        <div className="logo3"></div>
+         <div className="logo-container">
+ 					<div className="logo4"></div>
+ 					<h6>KMC - Hospital</h6>
             <hr />
           </div>
           <div className="menu">
