@@ -5,9 +5,22 @@ const userSchema = new mongoose.Schema({
 	type:String,
 	required:[true, 'name is required']
 	},
+	lastname: {
+		type: String,
+		required: false,
+	},
 	email: {
 	type:String,
-	required:[true, 'email is required']
+	required:[true, 'email is required'],
+	unique: true,
+	},
+	phone: {
+		type: String,
+		required: false,
+    },
+	address: {
+		type: String,
+		required: false,
 	},
 	password: {
 	type:String,

@@ -120,7 +120,10 @@ const DoctorAppointment = () => {
   return (
 	<Layout>
 		<div className="ListofDoctors-button">Appointment Lists</div>
-		<Table className="custom-table" columns={columns} dataSource={appointment} />
+		<div className="custom-table-container">
+		<Table className="custom-table" 
+		columns={columns} 
+		dataSource={appointment} scroll={{ x: '100%' }} /></div>
 	</Layout>
   )
 }

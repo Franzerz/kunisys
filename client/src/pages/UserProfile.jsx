@@ -5,6 +5,7 @@ import { showLoading, hideLoading } from '../redux/features/alertSlice'
 import axios from 'axios'
 import { Col, Form, Input, message, Row, Tabs } from 'antd'
 import Layout from '../components/Layout'
+import '../styles/LayoutStyles.css';
 
 const UserProfile = () => {
 	const {user} = useSelector(state => state.user)
@@ -72,8 +73,9 @@ const UserProfile = () => {
 	<Tabs className="custom-tabs" defaultActiveKey="1">
 	  <Tabs.TabPane tab="Profile" key="1">
 		{userInfo && (
-			 <div className="cardprofile">
- 		  <div className="ListofDoctors-button">Personal Details :</div>
+		<div className="custom-calendar-container">
+		  <div>
+		  <div className="ListofDoctors-button">Personal Details :</div>
 		  <Form
 			layout="vertical"
 			onFinish={handleProfileFinish}
@@ -81,31 +83,70 @@ const UserProfile = () => {
 			initialValues={{
 			  name: userInfo.name,
 			  email: userInfo.email,
+			  lastname: userInfo.lastname,
+			  phone: userInfo.phone,
+			  address: userInfo.address,
 			}}
 		  >
 			<Row gutter={20}>
-			  <Col xs={24} md={24} lg={24}>
-				<Form.Item label="Name" name="name" rules={[{ required: true, message: 'Name is required' }]}>
+			  <Col xs={24} md={24} lg={8}>
+				<Form.Item
+				  label="First Name"
+				  name="name"
+				  className="form-item"
+				  rules={[{ required: true, message: "Name is required" }]}
+				>
 				  <Input placeholder="Enter your name" />
 				</Form.Item>
-			  </Col>
-			  <Col xs={24} md={24} lg={24}>
-				<Form.Item label="Email" name="email" rules={[{ required: true, message: 'Email is required' }]}>
+				<Form.Item
+				  label="Email"
+				  name="email"
+				  className="form-item"
+				  rules={[{ required: true, message: "Email is required" }]}
+				>
 				  <Input type="email" placeholder="Enter your email" />
 				</Form.Item>
 			  </Col>
-			  <Col xs={24} md={24} lg={24}>
+			  <Col xs={24} md={24} lg={8}>
+			  <Form.Item
+				  label="Last Name"
+				  name="lastname"
+				  className="form-item"
+				  rules={[{ required: true, message: "Name is required" }]}
+				>
+				  <Input placeholder="Enter your last name" />
+				</Form.Item>
+				<Form.Item
+				  label="Address"
+				  name="address"
+				  className="form-item"
+				  rules={[{ required: true, message: "Name is required" }]}
+				>
+				  <Input placeholder="Enter your address" />
+				</Form.Item>
+			  </Col>
+			  <Col xs={24} md={24} lg={8}>
+			  <Form.Item
+				  label="Phone Number"
+				  name="phone"
+				  className="form-item"
+				  rules={[{ required: true, message: "Name is required" }]}
+				>
+				  <Input placeholder="08x-xxx-xxxx" />
+				</Form.Item>
 				<button type="submit" className="btn btn-primary form-btn">
 				  Submit
 				</button>
-			  </Col>
+				</Col>
 			</Row>
 		  </Form>
-		  </div>
+		</div>		
+		</div>
 		)}
 	  </Tabs.TabPane>
 	  <Tabs.TabPane tab="Change Password" key="2">
-		<Form layout="vertical" onFinish={handlePasswordFinish} className="m-3">
+		<Form layout="vertical" onFinish={handlePasswordFinish}>
+		<div className="custom-calendar-container">
 		  <Row gutter={20}>
 			<Col xs={24} md={24} lg={8}>
 			  <Form.Item
@@ -145,12 +186,11 @@ const UserProfile = () => {
 				<Input.Password placeholder="Confirm new password" />
 			  </Form.Item>
 			</Col>
-			<Col xs={24} md={24} lg={8}>
-			  <button type="submit" className="btn btn-primary form-btn">
-				Change Password
+			<button type="submit" className="btn3 btn3-primary form-btn">
+				Confirm
 			  </button>
-			</Col>
 		  </Row>
+		</div>
 		</Form>
 	  </Tabs.TabPane>
 	</Tabs>

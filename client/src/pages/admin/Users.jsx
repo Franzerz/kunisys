@@ -90,7 +90,7 @@ const Users = () => {
   return (
 	<Layout>
 		<div className="ListofDoctors-button">User Lists</div>
-		<Table className="custom-table " columns={columns} dataSource={users} />
+		<Table className="custom-table " columns={columns} dataSource={users} scroll={{ x: '100%' }}/>
 	</Layout>
   )
 }

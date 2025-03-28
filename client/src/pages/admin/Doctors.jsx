@@ -77,7 +77,8 @@ const Doctors = () => {
   return (
 	<Layout>
 		<div className="ListofDoctors-button">List of Doctors</div>
-		<Table className="custom-table" columns={columns} dataSource={doctors} />
+		<div className="custom-table-container">
+		<Table className="custom-table" columns={columns} dataSource={doctors} scroll={{ x: '100%' }}/></div>
 	</Layout>
   )
 }

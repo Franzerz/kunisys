@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Layout from '../components/Layout'
+import UserLayout from '../components/UserLayout'
 import dayjs from 'dayjs'
 import { Table, message } from 'antd'
 import '../styles/Calendar.css';
@@ -75,7 +75,7 @@ const Appointment = () => {
 			title: 'Date & Time',
 			dataIndex: 'date',
 			render:(text,record) => (
-				<span>
+				<span className="date-time-cell">
 					{dayjs(record.date).format('DD-MM-YYYY')} &nbsp;
 					{dayjs(record.time).format('HH:mm')}
 				</span>
@@ -99,10 +99,17 @@ const Appointment = () => {
 	]
 
   return (
-	<Layout>
+	<UserLayout>
 		<div className="ListofDoctors-button">Appointment Lists</div>
-		<Table className="custom-table" columns={columns} dataSource={appointment} />
-	</Layout>
+		<div className="custom-table-container">
+		<Table
+			className="custom-table"
+			columns={columns}
+			dataSource={appointment}
+			scroll={{ x: '100%' }}
+			/>
+			</div>
+	</UserLayout>
   )
 }
 

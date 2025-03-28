@@ -1,117 +1,138 @@
-.main{
+.main {
 	padding: 10px;
 	height: 100vh;
-}
-
-.layout{
+	font-family: 'Montserrat', sans-serif;
+  }
+  
+  .layout {
 	display: flex;
-}
-
-.sidebar{
+  }
+  
+  .sidebar {
 	min-height: 100%;
-	width: 300px;
 	border-radius: 5px;
-	background-color: #8ec9c6;
-	box-shadow: 0 0 2px grey;
 	margin-right: 20px;
+	width: 250px;
+	background-color: #77c6c2;
+	box-shadow: 0 0 2px grey;
 	color: white;
-}
-
-.content{
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	transition: width 0.3s ease, visibility 0.3s ease;
+	z-index: 999;
+  }
+  
+  .sidebar.hidden {
+	width: 0;
+	visibility: hidden;
+  }
+  
+  .content {
 	width: 100%;
 	height: 100%;
-}
-
-.header{
+  }
+  
+  .header {
 	height: 10vh;
 	margin-bottom: 20px;
+	border: 4px solid #4CB6AC;
+	border-radius: 20px;
 	box-shadow: 0 0 2px grey;
 	background-color: white;
-}
-
-.body{
-	height: 85vh;
-	margin-bottom: 20px;
-	box-shadow: 0 0 2px grey;
-	background-color: white;
-}
-
-h6 {
-	font-size: 16px; /* Font size for the text */
-	font-weight: bold; /* Makes the text bold */
-	margin: 0; /* Removes default margins for proper alignment */
-}
-
-.logo h6{
+  }
+  
+  h6 {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0;
+  }
+  
+  .logo h6 {
 	font-size: 1.5rem;
 	text-align: center;
 	margin: 20px 0px;
-}
-
-.menu{
+  }
+  
+  .menu {
 	margin-top: -10px;
-}
-
-.menu-item{
+  }
+  
+  .menu-item {
 	margin-top: 30px;
-}
-
-.menu-item a{
+  }
+  
+  .menu-item a {
 	color: white;
 	text-decoration: none;
 	font-size: 1.2rem;
-}
-
-.menu-item i{
+  }
+  
+  .menu-item i {
 	font-size: 1.2rem;
 	margin: 0px 15px;
-}
-
-.active{
+  }
+  
+  .active {
 	background-color: white;
 	padding: 10px;
-}
-
-.active a, .active i{
+  }
+  
+  .active a, .active i {
 	color: #62aeaa;
-}
-
-.header-content{
+  }
+  
+  .header-content {
 	display: flex;
 	align-items: center;
-	height: 50px;
 	justify-content: flex-end;
-	margin: 0 15px;
-}
-
-.header-content i{
+	cursor: pointer;
+  }
+  
+  .header-content i {
 	font-size: 1.2rem;
 	margin-right: 5px;
-}
-
-.header-content a{
+  }
+  
+  .header-content a {
 	text-decoration: none;
 	font-size: 1.2rem;
 	color: #262626;
 	margin: 0 10px;
 	text-transform: uppercase;
-}
-
-.ant-tabs-tab {
+  }
+  
+  .header-content .ant-badge {
+	font-size: 1rem;
+	margin-top: 10px;
+	position: relative;
+  }
+  
+  .appointment-details {
+	text-align: left;
+	font-size: 18px;
+	color: #333;
+  }
+  
+  .ant-tabs-nav {
+	border: none;
+  }
+  
+  .ant-tabs-tab {
 	background-color: #add8e6;
-	border: 1px solid #add8e6;
 	border-radius: 5px;
 	color: #000;
 	text-align: center;
 	padding: 5px 25px;
 	margin-right: -15px;
-	margin-top: 10px; 
-	margin-left: 10px; 
-	margin-bottom: 10px; 
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-bottom: 10px;
 	cursor: pointer;
 	transition: background-color 0.3s, color 0.3s ease;
+	border-bottom: none;
   }
-  
   
   .ant-tabs-tab:hover {
 	background-color: #b0e0e6;
@@ -119,9 +140,9 @@ h6 {
   }
   
   .ant-tabs-tab-active {
-	background-color: #87cefa; 
-	color: white; 
-	border-color: #87cefa; 
+	background-color: #87cefa;
+	color: white;
+	border-color: #87cefa;
   }
   
   .custom-tabs .ant-tabs-tab:nth-child(1) {
@@ -129,19 +150,19 @@ h6 {
 	font-family: 'Montserrat', sans-serif;
 	color: #000;
 	font-size: 16px;
-	text-align: center; 
-	padding: 1px 25px; 
+	text-align: center;
+	padding: 1px 25px;
 	border: 2px solid #ADE8F4;
 	border-radius: 20px;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 	transition: all 0.3s ease;
   }
-
-	.custom-tabs .ant-tabs-tab-active:nth-child(1) {
-		background-color: #6ED2E6;
-		color: white;
-		border-color: #6ED2E6;
-	  }
+  
+  .custom-tabs .ant-tabs-tab-active:nth-child(1) {
+	background-color: #6ED2E6;
+	color: white;
+	border-color: #6ED2E6;
+  }
   
   .custom-tabs .ant-tabs-tab:nth-child(1):hover {
 	background-color: #6ED2E6;
@@ -162,68 +183,423 @@ h6 {
 	border-radius: 20px;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 	transition: all 0.3s ease;
-	margin-top: 10px; 
-	margin-left: 30px; 
-	margin-bottom: 10px; 
+	margin-top: 10px;
+	margin-left: 30px;
+	margin-bottom: 10px;
 	cursor: pointer;
   }
   
   .custom-tabs .ant-tabs-tab:nth-child(2):hover {
-	background-color: #6ED2E6; 
-	border-color: #6ED2E6; 
+	background-color: #6ED2E6;
+	border-color: #6ED2E6;
 	color: #333;
-	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); 
-	transform: scale(1.05); 
+	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+	transform: scale(1.05);
   }
   
-  /* Active styling for "Change Password" tab */
   .custom-tabs .ant-tabs-tab-active:nth-child(2) {
 	background-color: #6ED2E6;
-	color: white; 
+	color: white;
 	border-color: #6ED2E6;
   }
   
- 
+  .custom-tabs .ant-tabs-tab:nth-child(3) {
+	background-color: #ADE8F4;
+	font-family: 'Montserrat', sans-serif;
+	color: #000;
+	font-size: 16px;
+	text-align: center;
+	padding: 10px 25px;
+	border: 2px solid #ADE8F4;
+	border-radius: 20px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+	margin-top: 10px;
+	margin-left: 30px;
+	margin-bottom: 10px;
+	cursor: pointer;
+  }
+  
+  .custom-tabs .ant-tabs-tab:nth-child(3):hover {
+	background-color: #6ED2E6;
+	border-color: #6ED2E6;
+	color: #333;
+	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+	transform: scale(1.05);
+  }
+  
+  .custom-tabs .ant-tabs-tab-active:nth-child(3) {
+	background-color: #6ED2E6;
+	color: white;
+	border-color: #6ED2E6;
+  }
+  
+  .custom-tabs .ant-tabs-tab:nth-child(4) {
+	background-color: #ADE8F4;
+	font-family: 'Montserrat', sans-serif;
+	color: #000;
+	font-size: 16px;
+	text-align: center;
+	padding: 10px 25px;
+	border: 2px solid #ADE8F4;
+	border-radius: 20px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+	margin-top: 10px;
+	margin-left: 30px;
+	margin-bottom: 10px;
+	cursor: pointer;
+  }
+  
+  .custom-tabs .ant-tabs-tab:nth-child(4):hover {
+	background-color: #6ED2E6;
+	border-color: #6ED2E6;
+	color: #333;
+	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+	transform: scale(1.05);
+  }
+  
+  .custom-tabs .ant-tabs-tab-active:nth-child(4) {
+	background-color: #6ED2E6;
+	color: white;
+	border-color: #6ED2E6;
+  }
+  
   .custom-tabs .ant-tabs-ink-bar {
 	display: none;
   }
   
-
   .custom-tabs .ant-tabs-ink-bar {
 	background-color: #87cefa;
 	height: 3px;
 	border-radius: 2px;
   }
-
-.custom-tabs .ant-tabs-tab-active:nth-child(1) .ant-tabs-tab-btn,
-.custom-tabs .ant-tabs-tab-active:nth-child(2) .ant-tabs-tab-btn {
-  color: #000;
-}
-
-.custom-tabs .ant-tabs-tab:nth-child(1) .ant-tabs-tab-btn,
-.custom-tabs .ant-tabs-tab:nth-child(2) .ant-tabs-tab-btn {
-  color: #000;
-  transition: color 0.3s ease;
-}
-
-.logo3 {
+  
+  .custom-tabs .ant-tabs-tab-active:nth-child(1) .ant-tabs-tab-btn,
+  .custom-tabs .ant-tabs-tab-active:nth-child(2) .ant-tabs-tab-btn,
+  .custom-tabs .ant-tabs-tab-active:nth-child(3) .ant-tabs-tab-btn,
+  .custom-tabs .ant-tabs-tab-active:nth-child(4) .ant-tabs-tab-btn {
+	color: #000;
+	font-family: Montserrat, sans-serif;
+  }
+  
+  .custom-tabs .ant-tabs-tab:nth-child(1) .ant-tabs-tab-btn,
+  .custom-tabs .ant-tabs-tab:nth-child(2) .ant-tabs-tab-btn,
+  .custom-tabs .ant-tabs-tab:nth-child(3) .ant-tabs-tab-btn,
+  .custom-tabs .ant-tabs-tab:nth-child(4) .ant-tabs-tab-btn {
+	color: #000;
+	transition: color 0.3s ease;
+	font-family: Montserrat, sans-serif;
+	font-size: 18px;
+  }
+  
+  .logo3 {
 	width: 120px;
 	height: 60px;
 	background: url('../images/Logowhite.png') no-repeat center center/contain;
 	margin: 10px auto;
 	position: relative;
 	top: 0px;
-	}
-	
-.logo-container2 {
+  }
+  
+  .logo-container2 {
+	margin-top: 15px;
 	display: flex;
 	align-items: center;
-	}
-	
-.logo4 {
+  }
+  
+  .logo4 {
 	width: 60px;
 	height: 60px;
 	background: url('../images/KQueLogowhite.png') no-repeat center center/contain;
 	margin-left: 30px;
 	margin-right: 10px;
+  }
+  
+  .btn {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+	font-size: 16px;
+	font-family: Montserrat, sans-serif;
+  }
+  
+  .btn-primary {
+	background-color: #ADE8F4;
+	color: rgb(23, 23, 23);
+	transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+	background-color: #6ED2E6;
+	color: rgb(23, 23, 23);
+	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-primary2 {
+	background-color: #6ED2E6;
+	color: rgb(23, 23, 23);
+	transition: all 0.3s ease;
+  }
+  
+  .btn-primary2:hover {
+	background-color: #65cce0;
+	color: rgb(23, 23, 23);
+	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+	transform: scale(1.05);
+  }
+  
+  .btn3 {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+	font-size: 16px;
+	margin-top: -3px;
+	font-family: Montserrat, sans-serif;
+  }
+  
+  .btn3-primary {
+	background-color: #ADE8F4;
+	color: rgb(23, 23, 23);
+	transition: all 0.3s ease;
+  }
+  
+  .btn3-primary:hover {
+	background-color: #6ED2E6;
+	color: rgb(23, 23, 23);
+	box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .content {
+	transition: margin-left 0.3s ease;
+  }
+  
+  .custom-calendar-container .ant-picker-calendar .ant-picker-cell-inner {
+	height: 70px !important;
+	padding: 4px !important;
+  }
+  
+  .custom-calendar-container .ant-picker-calendar .ant-picker-panel .ant-picker-content th,
+  .custom-calendar-container .ant-picker-calendar .ant-picker-panel .ant-picker-content td {
+	padding: 4px !important;
+  }
+  
+  .toggle-btn {
+	position: fixed;
+	top: 60px;
+	left: 20px;
+	z-index: 1000;
+	background: transparent;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-size: 18px;
+  }
+  
+  .toggle-btn:hover {
+	background: transparent;
+	transform: scale(1.07);
+  }
+  
+  .toggle-btn.sidebar-visible {
+	top: 50px;
+	left: 150px;
+  }
+  
+  .toggle-btn.sidebar-hidden {
+	color: #000000;
+	top: 50px;
+	left: 104px;
+  }
+  
+  .logoheader {
+	display: inline-block;
+	margin-right: 10px;
+  }
+  
+  .logo-image {
+	height: 50px;
+	margin-top: 5px;
+	margin-right: 20px;
+  }
+  
+  .queue-info {
+	margin-left: 20px;
+	text-align: right;
+  }
+  
+  .reminder-text {
+	display: inline-block;
+	vertical-align: middle;
+  }
+  
+  .appointment-details-container {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	flex-wrap: nowrap;
+  }
+  
+  .user-link {
+	margin-left: 20px;
+	position: relative;
+	top: 5px;
+  }
+  
+  .footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #f6f6f6;
+	color: #333;
+	text-align: center;
+	padding: 10px;
+	z-index: 3;
+  }
+  
+  @media (max-width: 768px) {
+	.header-content .ant-badge,
+	.header-content .fa-solid.fa-bell,
+	.user-link {
+	  display: none !important;
 	}
+  
+	.reminder-text, .queue-info {
+	  font-size: 14px;
+	  margin-left: 5px;
+	  margin-right: 5px;
+	  display: block;
+	}
+  
+	.appointment-details-container {
+	  flex-wrap: wrap;
+	  gap: 5px;
+	}
+  
+	.header-content {
+	  justify-content: space-between;
+	  padding: 0 10px;
+	}
+  
+	.header-content a {
+	  font-size: 1rem;
+	  margin: 0 -100px;
+	  position: relative;
+	  left: 120px;
+	}
+  
+	.header-content i {
+	  font-size: 1rem;
+	  margin-right: 3px;
+	  position: relative;
+	  top: 0px;
+	  left: 0px;
+	}
+  
+	.header-content .ant-badge {
+	  font-size: 1rem;
+	  margin-right: 3px;
+	  position: relative;
+	  left: 120px;
+	}
+  
+	.appointment-details-container {
+	  flex-direction: row;
+	  align-items: center;
+	  flex-wrap: wrap;
+	}
+  
+	.user-link {
+	  margin-left: 30px;
+	  top: 3px;
+	}
+  
+	.logo-image {
+	  display: none;
+	}
+  
+	.queue-info {
+	  margin-left: 10px;
+	  text-align: left;
+	}
+  
+	.reminder-text {
+	  display: inline-block;
+	  vertical-align: middle;
+	  margin-left: 144px;
+	}
+  
+	.content {
+	  margin-left: 0;
+	}
+  
+	.sidebar.visible {
+	  width: 65%;
+	  visibility: visible;
+	}
+  
+	.toggle-btn {
+	  top: 40px;
+	  left: 20px;
+	  padding: 8px 16px;
+	}
+  
+	.toggle-btn.sidebar-visible {
+	  top: 65px;
+	  left: 43%;
+	}
+  
+	.toggle-btn.sidebar-hidden {
+	  top: 65px;
+	  left: 6%;
+	}
+  
+	.logo-container2 {
+	  margin-top: 30px;
+	  display: flex;
+	  align-items: center;
+	}
+  
+	.reminder2-text {
+	  display: inline-block;
+	  vertical-align: middle;
+	  margin-left: 144px;
+	}
+  }
+  
+  @media (max-width: 480px) {
+	.logo-image {
+	  display: none;
+	}
+  
+	.appointment-details-container {
+	  margin-top: 5px;
+	}
+  
+	.user-link {
+	  padding-left: 110px;
+	  top: 1px;
+	}
+  
+	.queue-info {
+	  margin-top: 5px;
+	}
+  
+	.reminder-text {
+	  display: inline-block;
+	  vertical-align: middle;
+	  margin-left: 205px;
+	}
+  
+	.reminder2-text {
+	  display: inline-block;
+	  vertical-align: middle;
+	  margin-left: 205px;
+	}
+  }

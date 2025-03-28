@@ -20,6 +20,7 @@ import ResetPassword from './pages/ResetPassword';
 import DoctorHomePage from './pages/doctors/DoctorHomePage';
 import AdminHomePage from './pages/admin/AdminHomePage';
 import Welcome from './pages/Welcome';
+import Terms from './pages/Terms';
 
 function App() {
   const {loading} = useSelector(state => state.alerts);
@@ -45,6 +46,7 @@ function App() {
       <Route path="/doctor/home" element={<ProtectedRoute><DoctorHomePage /></ProtectedRoute>} />
       <Route path="/admin/home" element={<ProtectedRoute><AdminHomePage /></ProtectedRoute>} />
       <Route path="/welcome" element={<PublicRoute><Welcome /></PublicRoute>} />
+      <Route path="/terms" element={<PublicRoute><Terms /></PublicRoute>} />
     </Routes>
     }
     </BrowserRouter>

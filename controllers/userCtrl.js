@@ -163,7 +163,7 @@ const authController = async (req, res) => {
 		  if (fullDateTime.isBefore(doctorStart) || fullDateTime.isAfter(doctorEnd)) {
 			return res.status(200).send({ 
 			  success: false, 
-			  message: "Selected time is outside doctor's available hours" 
+			  message: "Sorry, the selected time doctor's unavailable."
 			});
 		  }
 		  const fromTime = fullDateTime.subtract(15, 'minutes').toISOString();
@@ -207,10 +207,10 @@ const authController = async (req, res) => {
 
   const updateProfileController = async (req, res) => {
 	try {
-	  const { userId, name, email } = req.body;
+	  const { userId, name, lastname, phone, email, address } = req.body;
 	  const updatedUser = await userModel.findByIdAndUpdate(
 		userId,
-		{ name, email },
+		{ name, lastname, phone, email, address },
 		{ new: true }
 	  )
 	  updatedUser.password = undefined;

@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import {showLoading, hideLoading} from '../redux/features/alertSlice'
 
+
 const BookingPage = () => {
 	const {user} = useSelector(state => state.user)
 	const params = useParams();
@@ -72,7 +73,7 @@ const BookingPage = () => {
 			);
 			dispatch(hideLoading());
 			if (!availRes.data.success) {
-				return alert("Selected timeslot is not available. Please check availabilty first.");
+				return alert("Selected timeslot is not availables. Please check availabilty first.");
 			}
 			dispatch(showLoading());
 			const res = await axios.post('/api/v1/user/appointment',
@@ -102,26 +103,39 @@ const BookingPage = () => {
 	}, [])
   return (
 	<Layout>
-		<div className="ListofDoctors-button">Booking Page</div>
- 		<div className="container">
-     <div className="card">
-         {doctor && (
-             <div className="card-body">
-                 <div className="card-header">
- 				Dr. {doctor.firstName} {doctor.lastName}</div>
-                 <p><b>Specialization:</b> {doctor.specialization}</p>
- 				<p><b>Phone:</b> {doctor.phone}</p>
- 				<p><b>Email:</b> {doctor.email}</p>
-                 <p><b>Available Timeslot:</b> {doctor.time && doctor.time[0]} - {doctor.time && doctor.time[1]}</p>
-                 <DatePicker className="form-control my-2" format="DD-MM-YYYY" onChange={(value) => setDate(dayjs(value).format('DD-MM-YYYY'))} />
-                 <TimePicker className="form-control my-2" format="HH:mm" onChange={(value) => setTime(dayjs(value).format('HH:mm'))} />
-                 <button className="btn btn-primary w-100 mt-2" onClick={handleAvailability}>Check Availability</button>
-                 <button className="btn btn-dark w-100 mt-2" onClick={handleBooking}>Book Now</button>
-             </div>
-         )}
-     </div>
- </div>
-	</Layout>
+	<div className="ListofDoctors-button">Booking Page</div>
+		<div className="doccard">
+			{doctor && (
+				<>
+					<div className="doccard-header">
+						Dr. {doctor.firstName} {doctor.lastName}
+					</div>
+					<div className="doccard-body">
+						<p><b>Specialization:</b> {doctor.specialization}</p>
+						<p><b>Phone:</b> {doctor.phone}</p>
+						<p><b>Email:</b> {doctor.email}</p>
+						<p><b>Available Timeslot:</b> {doctor.time ? `${doctor.time[0]} - ${doctor.time[1]}` : 'No timeslot available'}</p>
+						<DatePicker
+							className="form-control my-2"
+							format="DD-MM-YYYY"
+							onChange={(value) => setDate(dayjs(value).format('DD-MM-YYYY'))}
+						/>
+						<TimePicker
+							className="form-control my-2"
+							format="HH:mm"
+							onChange={(value) => setTime(dayjs(value).format('HH:mm'))}
+						/>
+						<button className="btn btn-primary w-100 mt-2" onClick={handleAvailability}>
+							Check Availability
+						</button>
+						<button className="btn btn-dark w-100 mt-2" onClick={handleBooking}>
+							Book Now
+						</button>
+					</div>
+				</>
+			)}
+		</div>
+</Layout>
   )
 }
 

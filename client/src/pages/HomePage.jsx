@@ -83,7 +83,10 @@ const HomePage = () => {
 			</Row>
 			</TabPane>
 			<TabPane tab="My Bookings" key="2">
+			<div 
+				className="custom-calendar-container" >
 				<Calendar cellRender={cellRender} />
+				</div>
 			</TabPane>
 		</Tabs>
 		</UserLayout>
