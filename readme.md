@@ -77,3 +77,14 @@ This will start both the backend and frontend servers concurrently using `concur
 
 ---
 
+## Setting Up the First Admin
+
+To promote the first user to an admin:
+
+1. Open **MongoDB Compass**.
+2. Go to the **users** collection in your database.
+3. Find the user you want to make an admin.
+4. Change their `isAdmin` field to `true`.
+
+This will grant admin privileges to that user.
+
